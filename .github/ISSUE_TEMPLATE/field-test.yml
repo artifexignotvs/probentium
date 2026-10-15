@@ -1,0 +1,60 @@
+name: Field-test feedback
+description: A short report from the voluntary synthetic DFIR exercise.
+title: "[Field test] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Try the [ten-minute synthetic exercise](https://github.com/artifexignotvs/testifex/blob/main/docs/field-test.md). Blocked attempts are welcome.
+        This issue is public and associated with your GitHub account. Do not add incident data, logs, case files, reports, screenshots, attachments, evidence hashes, private paths, names, addresses, tokens or employer/client details. Use short descriptions and synthetic examples only.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version and TESTIFEX version only; no machine or account identifiers.
+      placeholder: Linux, Python 3.13, TESTIFEX 0.1.0a1
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      options:
+        - Completed before opening the answer check, without help
+        - Completed with help or after reading the answer check
+        - Stopped at a blocker or time limit
+        - Did not start
+    validations:
+      required: true
+  - type: textarea
+    id: time_and_blocker
+    attributes:
+      label: Time and first blocker or useful step
+      description: Approximate installation minutes and exercise minutes; name the first blocked or useful step. If this is a repeat, say so. No command output or attachments.
+      placeholder: "Installation: ... min; exercise: ... min. First blocker/useful step: ..."
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: Your interpretation
+      description: Before checking the answers, what changed, what did certain/possible mean, and did raw-record/source-hash verification agree? State one limit. Leave blank if not reached; do not paste identifiers or hashes.
+      render: text
+  - type: dropdown
+    id: use_again
+    attributes:
+      label: Would you use it again?
+      description: If yes or maybe, briefly name the task in the time/useful-step field without incident details. An actual later attempt can be a follow-up on this issue.
+      options:
+        - Yes, for a specific task
+        - Maybe, after a stated blocker is resolved
+        - No, it does not fit my work
+        - Not enough experience to judge
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public-data check
+      options:
+        - label: This report contains no private or real incident data and no attachments; any examples are synthetic.
+          required: true
