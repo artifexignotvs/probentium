@@ -17,11 +17,13 @@ body:
     id: outcome
     attributes:
       label: Outcome
+      description: Choose the outcome that actually occurred; check this selection before submitting.
       options:
+        - Did not start
+        - Stopped at a blocker or time limit
         - Completed before opening the answer check, without help
         - Completed with help or after reading the answer check
-        - Stopped at a blocker or time limit
-        - Did not start
+      default: 0
     validations:
       required: true
   - type: textarea
@@ -43,12 +45,13 @@ body:
     id: use_again
     attributes:
       label: Would you use it again?
-      description: If yes or maybe, briefly name the task in the time/useful-step field without incident details. An actual later attempt can be a follow-up on this issue.
+      description: Choose your own answer before submitting. If yes or maybe, briefly name the task in the time/useful-step field without incident details. An actual later attempt can be a follow-up on this issue.
       options:
-        - Yes, for a specific task
-        - Maybe, after a stated blocker is resolved
-        - No, it does not fit my work
         - Not enough experience to judge
+        - No, it does not fit my work
+        - Maybe, after a stated blocker is resolved
+        - Yes, for a specific task
+      default: 0
     validations:
       required: true
   - type: checkboxes
