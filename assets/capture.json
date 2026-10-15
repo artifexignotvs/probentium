@@ -1,0 +1,20 @@
+{
+  "schema": "testifex.capture.v1",
+  "command": "testifex browse --case auth-case --ascii",
+  "fixture_command": "testifex demo --directory demo-output",
+  "terminal_dimensions": [
+    116,
+    40
+  ],
+  "capture_method": "Unmodified program in a POSIX pseudo-terminal; actual terminal bytes replayed with a VT emulator. No substituted result text.",
+  "keys": [
+    "j x8",
+    "Enter",
+    "r",
+    "q",
+    "q"
+  ],
+  "exit_code": 0,
+  "raw_terminal_sha256": "99fb457f15fbe43bc0c6179c984e612dfe03b80ef9b5dd5d9d5d46eb02a69325",
+  "scope": "Synthetic example only; process execution evidence is not proof of session linkage or compromise."
+}

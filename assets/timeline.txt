@@ -1,0 +1,40 @@
+TESTIFEX | auth-case                                                                                                
+Sources 2 | parsed 10 | ignored 0 | errors 0                                                                        
+Sources not complete 0 | Import counts do not prove collection completeness.                                        
+Loaded case snapshot; filter searches imported event fields.                                                        
+UTC bounds: resolution + declared clock error; ties do not imply causality.                                         
+Matches 10 / loaded 10 | Filter: (none)                                                                             
+------------------------------------------------------------------------------------------------------------------- 
+> auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:00.000000Z .. 2026-01-01T00:00:00.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:05.000000Z .. 2026-01-01T00:00:05.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:10.000000Z .. 2026-01-01T00:00:10.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:15.000000Z .. 2026-01-01T00:00:15.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:20.000000Z .. 2026-01-01T00:00:20.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:25.000000Z .. 2026-01-01T00:00:25.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:30.000000Z .. 2026-01-01T00:00:30.999999Z]                                                      
+  auth.failure | edge-demo | operator                                                                               
+  [2026-01-01T00:00:35.000000Z .. 2026-01-01T00:00:35.999999Z]                                                      
+  auth.success | edge-demo | operator                                                                               
+  [2026-01-01T00:01:30.000000Z .. 2026-01-01T00:01:30.999999Z]                                                      
+  process.exec | edge-demo | operator                                                                               
+  [2026-01-01T00:01:45.000000Z .. 2026-01-01T00:01:45.000000Z]                                                      
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+------------------------------------------------------------------------------------------------------------------- 
+Event 1 / 10 | Unknown time in loaded set: 0                                                                        
+j/k or arrows | PgUp/PgDn | / filter | Enter details | q exit                                                       

@@ -1,0 +1,40 @@
+TESTIFEX | auth-case                                                                                                
+Sources 2 | parsed 10 | ignored 0 | errors 0                                                                        
+Sources not complete 0 | Import counts do not prove collection completeness.                                        
+Loaded case snapshot; filter searches imported event fields.                                                        
+UTC bounds: resolution + declared clock error; ties do not imply causality.                                         
+Matches 10 / loaded 10 | Filter: (none)                                                                             
+------------------------------------------------------------------------------------------------------------------- 
+Event 49b4ac6a363b01a615fa39c2a6c34a2d97d1d39f850a03bf59e9fcb18a36cca0                                              
+Kind: auth.success                                                                                                  
+UTC bounds: [2026-01-01T00:01:30.000000Z .. 2026-01-01T00:01:30.999999Z]                                            
+Bounds express recorded resolution and declared clock error, not confidence.                                        
+Original bounds: [2026-01-01T00:01:30.000000Z .. 2026-01-01T00:01:30.999999Z]                                       
+Original time text: 2026-01-01T00:01:30Z                                                                            
+Time basis: rfc3339_seconds                                                                                         
+Clock offset / error (us): 0 / 0                                                                                    
+Host: edge-demo                                                                                                     
+Actor: operator                                                                                                     
+Src ip: 192.0.2.30                                                                                                  
+Dst ip: None                                                                                                        
+Path: None                                                                                                          
+Action: ssh.authentication                                                                                          
+Source ID: faeceafe3a60e21f713c3e34d444a2d5c1ca963b75c748e4ebe24428ee72bcc5                                         
+Source label: synthetic-auth                                                                                        
+Source SHA-256: 2858fd62508797a8efcc0454bc5ab918d71558ae1dabf7d94bc354beac3afd43                                    
+Parser: auth / 1                                                                                                    
+Source status: complete                                                                                             
+Source parsed / ignored / errors: 9 / 0 / 0                                                                         
+Original line: 9                                                                                                    
+Byte offset / length: 832 / 107                                                                                     
+Record SHA-256: 8f6bbfc6ddd34a209b20afb294389af9824a70b5a39d2c1ff732752bd54e9e5d                                    
+Source options: {"clock_error_us":0,"clock_offset_us":0,"correction_reason":"","declared_end_us":null,"declared_sta 
+rt_us":null}                                                                                                        
+Attributes: {"pid":1234,"port":54321,"result":"success","service":"ssh"}                                            
+Hash agreement is consistency evidence, not proof of acquisition or completeness.                                   
+Press r to read the digest-checked raw record, escaped for display.                                                 
+                                                                                                                    
+                                                                                                                    
+------------------------------------------------------------------------------------------------------------------- 
+Detail lines 1-28 / 28                                                                                              
+j/k or arrows: scroll | PgUp/PgDn | r: raw record | q: back                                                         
