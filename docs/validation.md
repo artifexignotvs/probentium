@@ -1,6 +1,14 @@
 # Validation record
 
-This preview has been exercised locally on Linux x86_64 with CPython 3.13.5. Runtime syntax has also been parsed using Python 3.11's grammar; that is not an executed Python 3.11 test run. macOS and native Windows execution have not been validated. Windows is outside the current POSIX file-opening implementation.
+This preview has been exercised locally on Linux x86_64 with CPython 3.13.5. [Hosted CI run 38806882423](https://github.com/artifexignotvs/testifex/actions/runs/38806882423) passed for revision `88b7338ce0a29cef1f89986c410b7d6d7b0088e6` on all three configurations below:
+
+| Hosted system | Interpreter | Installed-package checks |
+| --- | --- | --- |
+| Ubuntu 24.04.5 LTS, x86_64 | CPython 3.11.17 | Wheel and source archive passed |
+| Ubuntu 24.04.5 LTS, x86_64 | CPython 3.13.16 | Wheel and source archive passed |
+| macOS 26.6.2, arm64 | CPython 3.13.16 | Wheel and source archive passed |
+
+Each package was installed in a separate clean virtual environment and tested outside the checkout: all 147 tests, the two synthetic scenarios, verification and replay comparison passed in each of the six execution contexts. These are repeated runs of the same suite, not 882 distinct tests. This records the linked revision; it does not establish compatibility with every system or later change. Native Windows has not been validated and is outside the current POSIX file-opening implementation. See [CI procedure](ci.md).
 
 ## Automated checks
 
