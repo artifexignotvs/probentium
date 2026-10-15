@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "testifex"
+version = "0.1.0a1"
+description = "Offline forensic evidence timelines with explicit uncertainty and reproducible analysis"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Artifex Ignotvs"}]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
+  "Topic :: Security",
+]
+
+[project.urls]
+Homepage = "https://github.com/artifexignotvs/testifex"
+Documentation = "https://github.com/artifexignotvs/testifex/tree/main/docs"
+Issues = "https://github.com/artifexignotvs/testifex/issues"
+
+[project.scripts]
+testifex = "testifex.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["testifex*"]
