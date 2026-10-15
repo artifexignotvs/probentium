@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  installed-packages:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: "3.11"
+          - os: ubuntu-latest
+            python: "3.13"
+          - os: macos-latest
+            python: "3.13"
+    env:
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      PYTHONNOUSERSITE: "1"
+      PYTHONPATH: ""
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install build tools
+        run: python -m pip install "build==1.3.0" "setuptools==84.0.0" "wheel==0.45.1"
+
+      - name: Build normalized distribution candidates
+        run: python scripts/build_release.py --output "$RUNNER_TEMP/distributions"
+
+      - name: Test installed wheel and source distribution outside checkout
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import shutil
+          import subprocess
+          import venv
+
+          project = Path(os.environ["GITHUB_WORKSPACE"]).resolve()
+          temporary = Path(os.environ["RUNNER_TEMP"]).resolve()
+          distribution = temporary / "distributions"
+          validation = temporary / "installed-validation"
+          validation.mkdir()
+
+          def run(command, directory, capture=False):
+              return subprocess.run(
+                  [str(value) for value in command], cwd=directory, check=True,
+                  text=True, stdout=subprocess.PIPE if capture else None,
+              ).stdout
+
+          for package_kind, pattern in (("wheel", "*.whl"), ("sdist", "*.tar.gz")):
+              candidates = list(distribution.glob(pattern))
+              if len(candidates) != 1:
+                  raise RuntimeError("exactly_one_distribution_required")
+              work = validation / package_kind
+              work.mkdir()
+              environment = work / "environment"
+              venv.EnvBuilder(with_pip=True).create(environment)
+              python = environment / "bin" / "python"
+              executable = environment / "bin" / "testifex"
+              if package_kind == "sdist":
+                  run([python, "-m", "pip", "install", "setuptools==84.0.0", "wheel==0.45.1"], work)
+              run([python, "-m", "pip", "install", "--no-index", "--no-deps",
+                   "--no-build-isolation", candidates[0]], work)
+              run([python, "-m", "pip", "check"], work)
+              shutil.copytree(project / "tests", work / "tests",
+                              ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+
+              # Probatio extra arborem fontium fasciculum institutum legit.
+              imported = json.loads(run([python, "-c",
+                  "import json, pathlib, sys, testifex; "
+                  "print(json.dumps({'module': str(pathlib.Path(testifex.__file__).resolve()), "
+                  "'prefix': str(pathlib.Path(sys.prefix).resolve())}))"], work, True))
+              module = Path(imported["module"])
+              if not module.is_relative_to(environment) or module.is_relative_to(project):
+                  raise RuntimeError("installed_module_origin_mismatch")
+              if Path(imported["prefix"]) != environment:
+                  raise RuntimeError("isolated_environment_required")
+              run([python, "-m", "unittest", "discover", "-s", "tests", "-v"], work)
+
+              # Exempla ficta iterum per mandatum publicum probantur.
+              run([executable, "--version"], work)
+              demo = json.loads(run([executable, "demo", "--directory", work / "demo"], work, True))
+              if not demo.get("synthetic") or demo.get("network_requests") != 0 or len(demo["scenarios"]) != 2:
+                  raise RuntimeError("synthetic_demo_contract_failed")
+              original = work / "demo" / "auth-case"
+              proof = json.loads(run([executable, "verify", "--case", original], work, True))
+              if proof.get("ok") is not True:
+                  raise RuntimeError("demo_verification_failed")
+              replay = work / "replay"
+              run([executable, "replay", "--case", original, "--into", replay], work)
+              first = json.loads(run([executable, "analyze", "--case", original], work, True))
+              second = json.loads(run([executable, "analyze", "--case", replay], work, True))
+              if first != second:
+                  raise RuntimeError("replayed_analysis_mismatch")
+              print(package_kind + ": installed tests, synthetic demo and replay passed", flush=True)
+          PY
