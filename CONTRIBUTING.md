@@ -1,5 +1,7 @@
 # Contributing
 
+To review the existing workflow without writing code, try the [synthetic field test](docs/field-test.md) and use its structured feedback form. An incomplete attempt or a concrete reason you would not use the tool is valuable.
+
 Start with a reproducible observation. For a parser or rule change, provide a minimal synthetic fixture, the expected interpretation, the actual result and the exact command/version. Do not upload real evidence, credentials or personal case material to an issue.
 
 Run `python -m unittest discover -s tests -v`, both `testifex demo` cases and any focused benchmark needed for the change. Tests should challenge the meaning of a finding and its uncertainty, not simply mirror the implementation. Describe any change to timestamp, provenance or source-accounting semantics explicitly.

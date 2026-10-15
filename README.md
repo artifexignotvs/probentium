@@ -1,17 +1,25 @@
 # TESTIFEX
 
-**Trace a finding back to bytes. See when the clock cannot support the story.**
+**Did that process run after the SSH login? Check the clocks before drawing a conclusion.**
 
-TESTIFEX is an offline terminal workbench for DFIR analysts reviewing small, portable evidence sets. It preserves imported files, locates every parsed record by byte offset, and makes time uncertainty visible in deterministic findings. No account, service, network request or model is needed.
+TESTIFEX helps incident responders review selected SSH/sudo logs, journal JSON and explicit process-event JSONL in the terminal. Follow a finding to its original source bytes, declare known clock error, and see whether the ordering still holds. Analysis runs locally without an account or network service.
+
+In the included synthetic case, a login at `00:01:30` and a process record at `00:01:45` appear ordered. Give the process collector a declared ±30-second clock error and that ordering becomes **possible**, rather than certain within the interval model. The records do not establish that the process belonged to the SSH session or that an intrusion occurred.
 
 **0.1.0a1 — public technical preview, Apache-2.0.** The complete current core is available for inspection and reuse. This is not a certified forensic suite or a replacement for established acquisition and artifact-parsing tools.
 
 [![Checks](https://github.com/artifexignotvs/testifex/actions/workflows/ci.yml/badge.svg)](https://github.com/artifexignotvs/testifex/actions/workflows/ci.yml)
 [Release and downloads](https://github.com/artifexignotvs/testifex/releases/tag/v0.1.0a1) · [License](LICENSE)
 
-## Try the complete workflow
+## Help test one investigation workflow
 
-Python 3.11 or later on a POSIX system is required. Linux is locally tested; see [validation](docs/validation.md) for the exact environment. Use real, non-symlink paths, including parent directories.
+We are looking for **five Linux or macOS incident responders** to try the synthetic example and tell us where it fails to help. Set aside ten minutes; stopping at a confusing step is useful feedback. There is no need to share incident data or contact details.
+
+**[Start the field test](docs/field-test.md)** · [Send structured feedback](https://github.com/artifexignotvs/testifex/issues/new?template=field-test.yml)
+
+## Run the demo
+
+Python 3.11 or later on a POSIX system is required. Installed packages have passed CI on Linux with Python 3.11/3.13 and macOS with Python 3.13; see [validation](docs/validation.md) for the exact run and its limits. Use real, non-symlink paths, including parent directories.
 
 ```sh
 git clone https://github.com/artifexignotvs/testifex.git
@@ -48,6 +56,8 @@ The release also includes a wheel for offline installation after download: `pyth
 
 ## Use your own copied evidence
 
+Check [supported formats](docs/formats.md) first. Traditional syslog timestamps such as `Jan 1 00:00:00` have no year or timezone; TESTIFEX preserves them as unknown time. It will not infer those values from your machine. The canonical process JSONL is an explicit input schema, not an adapter for every endpoint product. Start with the synthetic field test before evaluating a private export locally.
+
 ```sh
 testifex init investigation --name 'Authentication review'
 testifex ingest copied-auth.log --case investigation --format auth --label auth-export
@@ -83,6 +93,6 @@ python3 -m unittest discover -s tests -v
 python3 scripts/benchmark.py --help
 ```
 
-The useful question for a reviewer is concrete: can a second analyst find the original bytes, explain the uncertainty and reproduce the result? Adoption and productivity gains remain hypotheses to test with practitioners.
+The useful question for a reviewer is concrete: can a second analyst find the original bytes, explain the uncertainty and reproduce the result? The [field test](docs/field-test.md) checks that workflow. Adoption and productivity gains remain hypotheses to test with practitioners.
 
 Artifex Ignotvs · *Ex indiciis, non ex fama.*
