@@ -1,0 +1,188 @@
+{
+  "measurement_scope": "Separate ingest, direct Python analyze function, and verify operations. Not the complete analyze/report commands, report rendering, report validation, or public export.",
+  "runs": [
+    {
+      "case_size_bytes": 11797942,
+      "caveats": [
+        "One local measurement, not a benchmark distribution or a cross-tool comparison.",
+        "Filesystem cache was not flushed. Verify follows ingest and analysis.",
+        "Sparse synthetic records do not represent all real formats, corrupt data, high correlation density or live acquisition.",
+        "Peak RSS is per-process high-water memory, not incremental allocation or total system memory.",
+        "Input generation and interpreter startup are excluded from phase wall times.",
+        "A failed phase's elapsed time is time until refusal or failure, not successful throughput.",
+        "Case size is logical file bytes, not allocated filesystem blocks. Temporary input and case are deleted after the run."
+      ],
+      "command": "python scripts/benchmark.py --events 10000",
+      "environment": {
+        "available_cpu_affinity_count": 16,
+        "cpu_model": "Intel(R) Core(TM) i7-10700KF CPU @ 3.80GHz",
+        "filesystem": {
+          "block_size_bytes": 4096,
+          "cache": "not flushed; later phases may use warm filesystem cache",
+          "temporary_directory": true,
+          "type": "ext4"
+        },
+        "logical_cpus": 16,
+        "machine": "x86_64",
+        "process_model": "Each measured phase runs in a new child process; peak RSS includes that process's imports and retained case state.",
+        "python_implementation": "CPython",
+        "python_version": "3.13.5",
+        "release": "6.8.0-147-generic",
+        "system": "Linux",
+        "wall_time_scope": "Case open/create, operation and case close; interpreter startup and input generation are excluded."
+      },
+      "implementation": {
+        "fingerprint_method": "SHA-256 over sorted relative Python source paths and bytes, each followed by NUL",
+        "source_tree_sha256": "1b1671adbe17ff9c2710decb0ade6fd6a4cd6180d71fae7604b2c78cd5559ef4",
+        "version": "0.1.0a1"
+      },
+      "implementation_changed_during_measurement": false,
+      "input": {
+        "bytes": 546230,
+        "complete_groups": 10,
+        "description": "Six authentication failures, one success and one process record per sparse group; other records are generic. All data is synthetic.",
+        "events": 10000,
+        "expected_findings": 20,
+        "format": "events",
+        "generator_version": "1",
+        "group_period_rows": 1000,
+        "kinds": {
+          "auth.failure": 60,
+          "auth.success": 10,
+          "generic": 9920,
+          "process.exec": 10
+        },
+        "sha256": "7e00edb7f87c3b0f998267aacfeb2500a8943656de1fbf8e858cdf978a434b63"
+      },
+      "measured_at_utc": "2026-10-15T20:50:23.687505+00:00",
+      "phases": {
+        "analyze": {
+          "events_analyzed": 10000,
+          "findings": 20,
+          "peak_rss_bytes": 43122688,
+          "rss_native_unit": "KiB",
+          "rss_native_value": 42112,
+          "rss_source": "resource.ru_maxrss",
+          "status": "complete",
+          "wall_seconds": 0.375879
+        },
+        "ingest": {
+          "error_records": 0,
+          "ignored_records": 0,
+          "parsed_events": 10000,
+          "peak_rss_bytes": 24584192,
+          "rss_native_unit": "KiB",
+          "rss_native_value": 24008,
+          "rss_source": "resource.ru_maxrss",
+          "status": "complete",
+          "wall_seconds": 1.606581
+        },
+        "verify": {
+          "events_checked": 10000,
+          "peak_rss_bytes": 24809472,
+          "rss_native_unit": "KiB",
+          "rss_native_value": 24228,
+          "rss_source": "resource.ru_maxrss",
+          "status": "complete",
+          "verified": true,
+          "wall_seconds": 0.743096
+        }
+      },
+      "schema": "testifex.benchmark.v1",
+      "status": "complete"
+    },
+    {
+      "case_size_bytes": 117618972,
+      "caveats": [
+        "One local measurement, not a benchmark distribution or a cross-tool comparison.",
+        "Filesystem cache was not flushed. Verify follows ingest and analysis.",
+        "Sparse synthetic records do not represent all real formats, corrupt data, high correlation density or live acquisition.",
+        "Peak RSS is per-process high-water memory, not incremental allocation or total system memory.",
+        "Input generation and interpreter startup are excluded from phase wall times.",
+        "A failed phase's elapsed time is time until refusal or failure, not successful throughput.",
+        "Case size is logical file bytes, not allocated filesystem blocks. Temporary input and case are deleted after the run."
+      ],
+      "command": "python scripts/benchmark.py --events 100000",
+      "environment": {
+        "available_cpu_affinity_count": 16,
+        "cpu_model": "Intel(R) Core(TM) i7-10700KF CPU @ 3.80GHz",
+        "filesystem": {
+          "block_size_bytes": 4096,
+          "cache": "not flushed; later phases may use warm filesystem cache",
+          "temporary_directory": true,
+          "type": "ext4"
+        },
+        "logical_cpus": 16,
+        "machine": "x86_64",
+        "process_model": "Each measured phase runs in a new child process; peak RSS includes that process's imports and retained case state.",
+        "python_implementation": "CPython",
+        "python_version": "3.13.5",
+        "release": "6.8.0-147-generic",
+        "system": "Linux",
+        "wall_time_scope": "Case open/create, operation and case close; interpreter startup and input generation are excluded."
+      },
+      "implementation": {
+        "fingerprint_method": "SHA-256 over sorted relative Python source paths and bytes, each followed by NUL",
+        "source_tree_sha256": "1b1671adbe17ff9c2710decb0ade6fd6a4cd6180d71fae7604b2c78cd5559ef4",
+        "version": "0.1.0a1"
+      },
+      "implementation_changed_during_measurement": false,
+      "input": {
+        "bytes": 5462300,
+        "complete_groups": 100,
+        "description": "Six authentication failures, one success and one process record per sparse group; other records are generic. All data is synthetic.",
+        "events": 100000,
+        "expected_findings": 200,
+        "format": "events",
+        "generator_version": "1",
+        "group_period_rows": 1000,
+        "kinds": {
+          "auth.failure": 600,
+          "auth.success": 100,
+          "generic": 99200,
+          "process.exec": 100
+        },
+        "sha256": "16e01c7cf9e05cdcab55ed7920c16960f6791925a284c439c41b4dd724d253a5"
+      },
+      "measured_at_utc": "2026-10-15T20:51:11.388864+00:00",
+      "phases": {
+        "analyze": {
+          "events_analyzed": 100000,
+          "findings": 200,
+          "peak_rss_bytes": 210407424,
+          "rss_native_unit": "KiB",
+          "rss_native_value": 205476,
+          "rss_source": "resource.ru_maxrss",
+          "status": "complete",
+          "wall_seconds": 3.822626
+        },
+        "ingest": {
+          "error_records": 0,
+          "ignored_records": 0,
+          "parsed_events": 100000,
+          "peak_rss_bytes": 26292224,
+          "rss_native_unit": "KiB",
+          "rss_native_value": 25676,
+          "rss_source": "resource.ru_maxrss",
+          "status": "complete",
+          "wall_seconds": 21.234925
+        },
+        "verify": {
+          "events_checked": 100000,
+          "peak_rss_bytes": 26243072,
+          "rss_native_unit": "KiB",
+          "rss_native_value": 25628,
+          "rss_source": "resource.ru_maxrss",
+          "status": "complete",
+          "verified": true,
+          "wall_seconds": 7.773209
+        }
+      },
+      "schema": "testifex.benchmark.v1",
+      "status": "complete"
+    }
+  ],
+  "sampling": "One observation per input size, measured sequentially on the same local system.",
+  "schema": "testifex.benchmark-results.v1",
+  "status": "complete"
+}

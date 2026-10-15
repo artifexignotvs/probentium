@@ -1,0 +1,56 @@
+{
+  "schema": "testifex.time-reference.v1",
+  "tool": "date (GNU coreutils) 9.4",
+  "results": [
+    {
+      "timestamp": "2026-01-01T00:00:00Z",
+      "reference_us": 1767225600000000,
+      "parsed_low_us": 1767225600000000,
+      "matches": true
+    },
+    {
+      "timestamp": "2026-01-01T01:30:00.125+01:30",
+      "reference_us": 1767225600125000,
+      "parsed_low_us": 1767225600125000,
+      "matches": true
+    },
+    {
+      "timestamp": "1960-01-01T00:00:00.250000Z",
+      "reference_us": -315619199750000,
+      "parsed_low_us": -315619199750000,
+      "matches": true
+    },
+    {
+      "timestamp": "2000-02-29T23:59:59.999999Z",
+      "reference_us": 951868799999999,
+      "parsed_low_us": 951868799999999,
+      "matches": true
+    },
+    {
+      "timestamp": "2038-01-19T03:14:08.123456Z",
+      "reference_us": 2147483648123456,
+      "parsed_low_us": 2147483648123456,
+      "matches": true
+    },
+    {
+      "timestamp": "2026-01-01T00:00:00.123456789Z",
+      "reference_us": 1767225600123456,
+      "parsed_low_us": 1767225600123456,
+      "matches": true
+    },
+    {
+      "timestamp": "2026-01-01T00:00:00-05:45",
+      "reference_us": 1767246300000000,
+      "parsed_low_us": 1767246300000000,
+      "matches": true
+    },
+    {
+      "timestamp": "2400-02-29T12:34:56.000001Z",
+      "reference_us": 13574608496000001,
+      "parsed_low_us": 13574608496000001,
+      "matches": true
+    }
+  ],
+  "scope": "UTC microsecond lower-bound conversion only; no artifact-parser validation or certification.",
+  "ok": true
+}
