@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:probentium:schema:control-observation.v1",
+  "title": "Scoped supplied control observations",
+  "description": "Closed structural input contract. Runtime additionally enforces safe text, timestamp validity/order, unique subjects, reference membership, case scope and aggregate/byte budgets. References and declarations are not independent effectiveness or legal certification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "procedure_id",
+    "service_ref",
+    "population_ref",
+    "period",
+    "expected",
+    "observed",
+    "source_refs",
+    "attestation"
+  ],
+  "properties": {
+    "schema": {
+      "const": "control-observation.v1"
+    },
+    "procedure_id": {
+      "enum": [
+        "restore.v1",
+        "mfa.v1",
+        "remediation.v1"
+      ]
+    },
+    "service_ref": {
+      "$ref": "#/$defs/ref"
+    },
+    "population_ref": {
+      "$ref": "#/$defs/ref"
+    },
+    "period": {
+      "$ref": "#/$defs/period"
+    },
+    "expected": {
+      "type": "object"
+    },
+    "observed": {
+      "type": "array",
+      "maxItems": 20000
+    },
+    "source_refs": {
+      "$ref": "#/$defs/refs"
+    },
+    "attestation": {
+      "$ref": "#/$defs/attestation"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "procedure_id": {
+          "const": "restore.v1"
+        },
+        "expected": {
+          "$ref": "#/$defs/restoreExpected"
+        },
+        "observed": {
+          "items": {
+            "$ref": "#/$defs/restoreObserved"
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "procedure_id": {
+          "const": "mfa.v1"
+        },
+        "expected": {
+          "$ref": "#/$defs/mfaExpected"
+        },
+        "observed": {
+          "items": {
+            "$ref": "#/$defs/mfaObserved"
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "procedure_id": {
+          "const": "remediation.v1"
+        },
+        "expected": {
+          "$ref": "#/$defs/remediationExpected"
+        },
+        "observed": {
+          "items": {
+            "$ref": "#/$defs/remediationObserved"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "ref": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "refs": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/ref"
+      }
+    },
+    "microseconds": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(0|[1-9][0-9]{0,18})$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "end": {
+          "$ref": "#/$defs/timestamp"
+        }
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "at",
+        "statement"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/text"
+        },
+        "at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    },
+    "restoreExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rto_us",
+        "rpo_us"
+      ],
+      "properties": {
+        "rto_us": {
+          "$ref": "#/$defs/microseconds"
+        },
+        "rpo_us": {
+          "$ref": "#/$defs/microseconds"
+        }
+      }
+    },
+    "mfaExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "configured",
+        "enforced"
+      ],
+      "properties": {
+        "configured": {
+          "const": true
+        },
+        "enforced": {
+          "const": true
+        }
+      }
+    },
+    "remediationExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "remediated",
+        "retest_passed"
+      ],
+      "properties": {
+        "remediated": {
+          "const": true
+        },
+        "retest_passed": {
+          "const": true
+        }
+      }
+    },
+    "restoreObserved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "source_refs",
+        "restored",
+        "functional_check",
+        "elapsed_us",
+        "data_age_us"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/text"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "restored": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "functional_check": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "elapsed_us": {
+          "$ref": "#/$defs/microseconds"
+        },
+        "data_age_us": {
+          "$ref": "#/$defs/microseconds"
+        }
+      }
+    },
+    "mfaObserved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "source_refs",
+        "configured",
+        "enforced"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/text"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "configured": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "enforced": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "remediationObserved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "source_refs",
+        "applicable",
+        "remediated",
+        "retest_passed"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/text"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "applicable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "remediated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "retest_passed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

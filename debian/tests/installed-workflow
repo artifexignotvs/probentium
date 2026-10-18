@@ -1,0 +1,93 @@
+#!/usr/bin/python3 -I
+"""Instrumentum iam institutum exemplis fictis exploratur."""
+import base64
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+from probentium.contracts import canonical_bytes
+
+
+def check(condition, code):
+    if not condition:
+        raise RuntimeError(code)
+
+
+for name in ("probentium", "testifex"):
+    module = importlib.import_module(name)
+    location = Path(module.__file__).resolve()
+    check(location.is_relative_to("/usr/lib/python3/dist-packages"), "system_package_origin_required")
+
+with tempfile.TemporaryDirectory(prefix="probentium-installed-", dir=os.environ.get("AUTOPKGTEST_TMP")) as temporary:
+    root = Path(temporary)
+    root.chmod(0o700)
+    checks = []
+
+    def call(*arguments, expected=0, parse=True):
+        result = subprocess.run(["/usr/bin/probentium", *map(str, arguments)], cwd=root,
+                                stdin=subprocess.DEVNULL, capture_output=True, timeout=180)
+        check(result.returncode == expected, "cli_exit_mismatch")
+        return json.loads(result.stdout) if parse else result.stdout
+
+    def doc(name, value):
+        path = root / name
+        path.write_bytes(canonical_bytes(value))
+        path.chmod(0o600)
+        return path
+
+    demo = call("demo", root / "exercise")
+    check(demo["synthetic"] is True and demo["events"] == 132, "demo_mismatch")
+    case = root / "exercise" / "case"
+    check(call("verify", "--case", case)["ok"] is True, "integrity_failed")
+    checks.append("synthetic_demo_integrity")
+    envelope = call("--format", "json", "status", "--case", case)
+    check(envelope["data"]["events"] == 132 and envelope["errors"] == [], "json_envelope_mismatch")
+    for name in ("events-v2", "control-observation.v1", "deadline-plan.v1"):
+        schema = call("schema", name)
+        check(schema.get("$schema") is not None, "installed_schema_missing")
+    checks.append("machine_output_and_installed_schemas")
+    page = call("timeline", "--case", case, "--filter", "auth.success")
+    check(page["total"] == 1, "timeline_mismatch")
+    raw = call("event", "--case", case, page["rows"][0]["id"])
+    data = base64.b64decode(raw["raw_base64"], validate=True)
+    check(hashlib.sha256(data).hexdigest() == raw["raw_sha256"], "raw_digest_mismatch")
+    checks.append("evidence_locator_bytes")
+    key = root / "signing.seed"
+    public = call("key", "generate", "--output", key)
+    trust = doc("trust.json", {"schema": "probentium.trust.v1", "keys": [
+        {"key_id": public["key_id"], "alias": "synthetic-package-test", "status": "active", "reason": None}]})
+    packet = root / "synthetic.pbp"
+    call("packet", "export", "--case", case, "--key", key, "--output", packet)
+    unknown = call("packet", "verify", "--input", packet, "--require-signature")
+    check(unknown["signature_status"] == "valid" and unknown["key_trust"] == "unknown", "implicit_trust")
+    replayed = call("packet", "verify", "--input", packet, "--trust", trust, "--require-trusted-key", "--scope", "replay")
+    check(replayed["normalization_replay"] == "passed" and replayed["analysis_replay"] == "passed", "replay_failed")
+    checks.append("signed_packet_explicit_trust_and_replay")
+    restored = root / "restored"
+    call("packet", "restore", "--input", packet, "--output", restored, "--trust", trust, "--require-signature", "--require-trusted-key")
+    check(call("verify", "--case", restored)["ok"] is True, "restored_integrity_failed")
+    checks.append("signed_restore")
+    identity = root / "recipient.agekey"
+    generated = subprocess.run(["/usr/bin/age-keygen", "-o", str(identity)], capture_output=True, timeout=30)
+    check(generated.returncode == 0, "age_identity_failed")
+    recipient_result = subprocess.run(["/usr/bin/age-keygen", "-y", str(identity)], capture_output=True, timeout=30)
+    check(recipient_result.returncode == 0, "age_recipient_failed")
+    recipient = recipient_result.stdout.decode("ascii").strip()
+    encrypted, decrypted = root / "packet.age", root / "roundtrip.pbp"
+    call("packet", "encrypt", "--input", doc("encrypt.json", {"packet": str(packet), "recipients": [recipient]}), "--output", encrypted, "--trust", trust)
+    call("packet", "decrypt", "--input", doc("decrypt.json", {"packet": str(encrypted), "identity_file": str(identity)}), "--output", decrypted, "--trust", trust, "--require-trusted-key")
+    check(packet.read_bytes() == decrypted.read_bytes(), "age_roundtrip_mismatch")
+    damaged = bytearray(encrypted.read_bytes())
+    damaged[-1] ^= 1
+    (root / "damaged.age").write_bytes(damaged)
+    target = root / "must-not-exist.pbp"
+    call("packet", "decrypt", "--input", doc("damaged.json", {"packet": str(root / "damaged.age"), "identity_file": str(identity)}), "--output", target, expected=4, parse=False)
+    check(not target.exists(), "unauthenticated_output_created")
+    checks.append("system_age_roundtrip_and_tamper_refusal")
+    print(json.dumps({"status": "passed", "checks": checks, "synthetic_only": True,
+                      "parser_distribution_approval_tested": False, "legal_certification": False}, sort_keys=True))

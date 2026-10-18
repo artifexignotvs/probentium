@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+"""Series extra fontes currit; moduli instituti tantum adhibentur."""
+import importlib
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+
+source = Path(__file__).resolve().parents[2]
+for name in ("probentium", "testifex"):
+    module = importlib.import_module(name)
+    if not Path(module.__file__).resolve().is_relative_to("/usr/lib/python3/dist-packages"):
+        raise RuntimeError("system_package_origin_required")
+with tempfile.TemporaryDirectory(prefix="probentium-suite-", dir=os.environ.get("AUTOPKGTEST_TMP")) as temporary:
+    target = Path(temporary)
+    for name in ("tests", "tests_r1", "schemas", "scripts", "examples"):
+        shutil.copytree(source / name, target / name)
+    shutil.copy2(source / "pyproject.toml", target / "pyproject.toml")
+    shutil.copytree(source / "dev" / "livepreview", target / "dev" / "livepreview")
+    (target / "probentium").mkdir()
+    shutil.copy2(source / "probentium" / "workbench.py", target / "probentium" / "workbench.py")
+    environment = dict(os.environ)
+    environment.pop("PYTHONPATH", None)
+    environment["PYTHONNOUSERSITE"] = "1"
+    for suite in ("tests", "tests_r1"):
+        result = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", suite, "-v"],
+                                cwd=target, env=environment, check=False)
+        if result.returncode:
+            raise SystemExit(result.returncode)

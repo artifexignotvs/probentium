@@ -1,0 +1,41 @@
+.TH TESTIFEX 1 "October 2026" "TESTIFEX 0.1.0a1" "User Commands"
+.SH NAME
+testifex \- compatibility command for earlier evidence cases
+.SH SYNOPSIS
+.B testifex
+.I command
+.RI [ options ]
+.SH DESCRIPTION
+This is the earlier case-format command supplied with PROBENTIUM.
+It maintains supported evidence timelines with explicit time uncertainty.
+Its commands and case format differ from the current probentium command;
+it is not an alias for that command.
+.SH EXAMPLES
+.nf
+testifex init legacy-case \-\-name "Legacy exercise"
+testifex ingest \-\-case legacy-case evidence.jsonl \\
+  \-\-format events \-\-label "Synthetic input"
+testifex timeline \-\-case legacy-case
+testifex verify \-\-case legacy-case
+.fi
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Show help for the selected command.
+.TP
+.B \-\-version
+Show version information.
+.SH COMMANDS
+init, ingest, resume, sources, issues, timeline, event, analyze, report,
+snapshot, share, triage, diff, verify, replay, hypothesis, browse and demo.
+.PP
+Consult command-specific help before applying operations to an existing case.
+For current functionality and documented migration, use probentium.
+.SH SECURITY
+Cases contain plaintext evidence. Byte verification does not prove authorship,
+factual truth, legal compliance or collection completeness.
+Use synthetic data when reporting bugs publicly.
+.SH AUTHOR
+Artifex Ignotvs.
+.SH SEE ALSO
+.BR probentium (1)

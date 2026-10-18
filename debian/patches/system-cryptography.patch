@@ -1,0 +1,21 @@
+Description: Test the distribution cryptography 49 family separately
+ The upstream wheel installation remains pinned to cryptography 50.0.2.
+ This distribution-only metadata change permits the separately tested system
+ cryptography 49.0.0 package and its maintenance updates below version 50.
+ It does not alter parser-distribution approval or declare Debian-installed
+ bytes equivalent to an approved wheel. Actual compatibility evidence is
+ recorded separately from upstream wheel validation.
+Author: Artifex Ignotvs
+Forwarded: not-needed
+Last-Update: 2026-10-19
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -12,7 +12,7 @@
+ license = "Apache-2.0"
+ license-files = ["LICENSE", "NOTICE"]
+ authors = [{name = "Artifex Ignotvs"}]
+-dependencies = ["rfc8785==0.1.4", "cryptography==50.0.2"]
++dependencies = ["rfc8785==0.1.4", "cryptography>=49.0.0,<50.0.0"]
+ classifiers = [
+   "Development Status :: 3 - Alpha",
+   "Environment :: Console",

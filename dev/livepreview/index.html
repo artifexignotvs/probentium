@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="preview-token" content="PREVIEW_TOKEN">
+  <title>PROBENTIUM / Local workbench</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="environment" aria-label="Local development preview"><span>LOCAL</span><span>DEV</span></div>
+    <div class="wordmark">PROBENTIUM</div>
+    <div class="connection-wrap"><span id="connection" role="status">Connecting</span></div>
+  </header>
+  <div class="workbench">
+    <aside class="sidebar">
+      <div class="sidebar-heading">WORKSPACE</div>
+      <nav aria-label="Workbench modules">
+        <button data-key="1"><span class="nav-key">1</span><span class="nav-label">Overview</span></button>
+        <button data-key="2"><span class="nav-key">2</span><span class="nav-label">Evidence</span></button>
+        <button data-key="3"><span class="nav-key">3</span><span class="nav-label">Timeline</span></button>
+        <button data-key="4"><span class="nav-key">4</span><span class="nav-label">Controls</span></button>
+        <button data-key="5"><span class="nav-key">5</span><span class="nav-label">Incident</span></button>
+        <button data-key="6"><span class="nav-key">6</span><span class="nav-label">Filings</span></button>
+        <button data-key="7"><span class="nav-key">7</span><span class="nav-label">Changes</span></button>
+        <button data-key="8"><span class="nav-key">8</span><span class="nav-label">Claims</span></button>
+        <button data-key="9"><span class="nav-key">9</span><span class="nav-label">Scenarios</span></button>
+        <button data-key="0"><span class="nav-key">0</span><span class="nav-label">Review</span></button>
+        <button class="utility-start" data-key="v"><span class="nav-key">v</span><span class="nav-label">Verify case</span></button>
+        <button data-key="?"><span class="nav-key">?</span><span class="nav-label">Help</span></button>
+      </nav>
+      <div class="sidebar-foot">Evidence workbench<span>Local development preview</span></div>
+    </aside>
+    <section class="workspace" aria-labelledby="active-view">
+      <header class="workspace-heading">
+        <div class="case-context">
+          <div class="case-identity"><span class="context-label">CASE</span><span id="case-label">—</span></div>
+          <div class="case-meta"><span class="revision" id="case-revision">—</span><span id="case-state">—</span></div>
+        </div>
+        <div class="view-context">
+          <div class="view-title"><h1 id="active-view">Workbench</h1><span id="case-origin">—</span></div>
+          <dl class="counts" aria-label="Case totals">
+            <div><dt>Sources</dt><dd id="count-sources">—</dd></div>
+            <div><dt>Events</dt><dd id="count-events">—</dd></div>
+            <div><dt>Controls</dt><dd id="count-controls">—</dd></div>
+            <div><dt>Filings</dt><dd id="count-filings">—</dd></div>
+          </dl>
+        </div>
+      </header>
+      <main id="console" aria-label="Evidence workbench console" tabindex="0">
+        <div id="screen" role="region" aria-label="Current console view">Connecting to the local case...</div>
+      </main>
+      <div class="keyboard-bar" aria-label="Console keyboard shortcuts">
+        <span><kbd>j</kbd><kbd>k</kbd> Move</span>
+        <span><kbd>Enter</kbd> Inspect</span>
+        <span><kbd>/</kbd> Search</span>
+        <span><kbd>:</kbd> Command</span>
+        <span><kbd>?</kbd> Help</span>
+      </div>
+    </section>
+  </div>
+  <footer class="page-foot"><span>Ex indiciis, non ex fama.</span><span>LOCAL WORKBENCH</span></footer>
+  <span id="measure" aria-hidden="true">M</span>
+</body>
+</html>

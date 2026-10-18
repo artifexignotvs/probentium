@@ -3,14 +3,15 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "testifex"
-version = "0.1.0a1"
-description = "Offline forensic evidence timelines with explicit uncertainty and reproducible analysis"
+name = "probentium"
+version = "0.2.0.dev3"
+description = "Offline evidence workbench with explicit uncertainty and incident reporting drafts"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 authors = [{name = "Artifex Ignotvs"}]
+dependencies = ["rfc8785==0.1.4", "cryptography==50.0.2"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
@@ -26,6 +27,10 @@ Issues = "https://github.com/artifexignotvs/testifex/issues"
 
 [project.scripts]
 testifex = "testifex.cli:main"
+probentium = "probentium.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["testifex*"]
+include = ["testifex*", "probentium*"]
+
+[tool.setuptools.data-files]
+"share/probentium/schemas" = ["schemas/events-v2.schema.json", "schemas/control-observation.v1.schema.json", "schemas/deadline-plan.v1.schema.json"]

@@ -2,5 +2,21 @@ include README.md CHANGELOG.md SECURITY.md LICENSE NOTICE
 recursive-include docs *.md *.json
 recursive-include examples *.json *.jsonl *.log *.md
 recursive-include tests *.py
+recursive-include tests_r1 *.py
+recursive-include schemas *.json
 recursive-include scripts *.py
 recursive-include assets *.png *.cast *.json *.md *.txt
+prune dev
+include dev/livepreview/server.py dev/livepreview/index.html dev/livepreview/style.css dev/livepreview/app.js
+include dev/benchmark.py dev/benchmark-linux-100k.json
+include dev/benchmark-linux-100k-before-dependency-hardening.json dev/large-search-100001-final.json
+include dev/benchmark-linux-dev3-run1.json dev/benchmark-linux-dev3-run2.json dev/benchmark-linux-dev3-run3.json
+prune demo-output
+include debian/control debian/changelog debian/copyright debian/rules
+include debian/py3dist-overrides debian/pybuild.testfiles debian/probentium.docs
+include debian/probentium.manpages debian/run-build-tests.py debian/README.source
+recursive-include debian/man *.1
+include debian/source/format
+include debian/tests/control debian/tests/installed-workflow debian/tests/runtime-suite
+include debian/patches/series
+recursive-include debian/patches *.patch

@@ -1,0 +1,1398 @@
+{
+  "benchmarks": [
+    {
+      "path": "dev/benchmark-linux-dev3-run1.json",
+      "receipt": {
+        "analysis_execution_mode": "in_process_core_measurement_not_child_launch",
+        "analysis_expected_outcome": "Both conditional templates entailed; failure counts evaluated as observations and duplicate groups, not proven real-world attempts.",
+        "analysis_input_digest": "3563f611e8d0f41fa16f98715c6afc0cf888db751330f3e54350b18a09f575bb",
+        "analysis_limits": {
+          "max_claims": 1000,
+          "max_dependency_edges": 250000,
+          "max_events": 100000,
+          "max_findings": 20000,
+          "max_memberships": 1000000,
+          "max_memory_bytes": 1073741824,
+          "max_relations": 250000,
+          "max_report_bytes": 67108864,
+          "max_scenarios": 64,
+          "max_support_refs": 250000,
+          "max_time_variables": 32,
+          "max_wall_seconds": 900,
+          "schema": "probentium.analysis-limits.v1"
+        },
+        "analysis_outcomes": [
+          {
+            "count_units": [
+              "normalized_observation",
+              "explicit_duplicate_group"
+            ],
+            "execution_state": "complete",
+            "findings": 2,
+            "template": "auth_after_failures",
+            "verdicts": [
+              "entailed",
+              "entailed"
+            ]
+          },
+          {
+            "count_units": [],
+            "execution_state": "complete",
+            "findings": 1,
+            "template": "post_auth_process",
+            "verdicts": [
+              "entailed"
+            ]
+          }
+        ],
+        "architecture": "x86_64",
+        "cache_condition": "Fresh temporary case; operating-system caches were not evicted. Reads follow import and verification.",
+        "case_revision": 26,
+        "clock_assumption": {
+          "model_sha256": "96e88e799b3a72f1548b74367ce245e57879131d66455b7d9524b9931b49700c",
+          "scope": "The generated benchmark artifact only; no real host calibration is asserted.",
+          "type": "explicit_synthetic_zero_error"
+        },
+        "corpus_bytes": 15000000,
+        "corpus_sha256": "82a5461cc9fad4a67e5bafbeb6f083642f89b2e9ac0f67907f7483b4cd2d7db2",
+        "cpu_affinity_count": 4,
+        "database_bytes": 576397312,
+        "dependencies": {
+          "cryptography": "50.0.2",
+          "rfc8785": "0.1.4"
+        },
+        "environment_limitations": [
+          "Linux host measurement; not a macOS reference measurement.",
+          "CPU affinity limits eligible CPUs, not exclusive CPU availability.",
+          "Other host workloads were not stopped; this is not an isolated performance laboratory."
+        ],
+        "event_count": 100000,
+        "finished_at_utc": "2026-10-18T22:57:03.251000+00:00",
+        "import_accounting": {
+          "counters": {
+            "blank": 0,
+            "known_out_of_scope": 0,
+            "malformed": 0,
+            "oversize": 0,
+            "parsed": 100000,
+            "unsupported": 0
+          },
+          "events_total": 100000,
+          "interpretation_complete": true,
+          "records_total": 100000,
+          "state": "complete",
+          "unprocessed_bytes": 0
+        },
+        "integrity_passed": true,
+        "integrity_receipt": {
+          "checks": [
+            "database_structure",
+            "catalog_membership",
+            "evidence_and_record_bytes",
+            "parse_accounting_and_active_selection",
+            "normalized_event_identity",
+            "object_and_acquisition_identity",
+            "blob_inventory"
+          ],
+          "completeness": "acquired_bytes_present",
+          "exit_code": 0,
+          "limitations": [
+            "hashes_do_not_authenticate_authorship",
+            "parser_reexecution_not_performed",
+            "external_whole_history_rewrite_not_detectable_without_trusted_snapshot"
+          ],
+          "ok": true
+        },
+        "measurement_scope": {
+          "clock_setup": "Production save_clock validation and immutable write for an explicitly synthetic clock assumption.",
+          "full_verify": "Production CaseStore.verify including full source hashing and stored integrity checks.",
+          "import": "Production CaseStore.ingest including parser worker and checkpoints; source generation excluded.",
+          "load_data": "Production load_data, including its own mandatory verification, pagination and analytic projection.",
+          "rss": "Process lifetime peak including generation, import, verification, setup and analysis. Child value is RUSAGE_CHILDREN maximum, not a sum of simultaneous workers.",
+          "two_templates": "One correlate_many_data call over loaded data; includes validation, semantic digests and both templates. No source-file I/O."
+        },
+        "measurements": {
+          "clock_setup_ms": 84916,
+          "full_verify_ms": 46516,
+          "import_ms": 73693,
+          "load_data_ms": 78562,
+          "page_first_ms": 36,
+          "page_median_ms": 81,
+          "page_p95_ms": 126,
+          "two_templates_ms": 13018
+        },
+        "memory_profile": "Host allocation; no 16 GiB reference-machine memory cap was applied.",
+        "observed_thresholds": {
+          "import_under_60s": false,
+          "page_p95_under_250ms": true,
+          "parent_under_512mib": false,
+          "two_templates_under_15s": true
+        },
+        "page_sampling": {
+          "condition": "Post-verification reads; the first sample is not a cold-cache measurement.",
+          "latencies_ms": [
+            36,
+            38,
+            42,
+            46,
+            48,
+            51,
+            55,
+            58,
+            61,
+            64,
+            69,
+            78,
+            75,
+            79,
+            79,
+            83,
+            87,
+            91,
+            100,
+            99,
+            110,
+            103,
+            106,
+            109,
+            126,
+            123,
+            122,
+            124,
+            124,
+            131
+          ],
+          "offsets": [
+            0,
+            3444,
+            6889,
+            10334,
+            13779,
+            17224,
+            20668,
+            24113,
+            27558,
+            31003,
+            34448,
+            37893,
+            41337,
+            44782,
+            48227,
+            51672,
+            55117,
+            58562,
+            62006,
+            65451,
+            68896,
+            72341,
+            75786,
+            79231,
+            82675,
+            86120,
+            89565,
+            93010,
+            96455,
+            99900
+          ],
+          "p95_method": "nearest rank: sorted samples[ceil(0.95*n)-1]",
+          "page_size": 100,
+          "samples": 30
+        },
+        "parent_peak_rss_kib": 544456,
+        "platform": "Linux",
+        "python": "3.13.5",
+        "run_count": 1,
+        "schema": "probentium.benchmark.v2",
+        "source_sha256_after": {
+          "dev/benchmark.py": "c9f4056be947fffb311d258878d012e3239ceab2838878b3c64db68f073f7455",
+          "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+          "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+          "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+          "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+          "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+          "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+          "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+          "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+          "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+          "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+          "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+          "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+          "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+          "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+          "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+          "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+          "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+          "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+          "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+          "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+          "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47"
+        },
+        "source_sha256_before": {
+          "dev/benchmark.py": "c9f4056be947fffb311d258878d012e3239ceab2838878b3c64db68f073f7455",
+          "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+          "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+          "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+          "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+          "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+          "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+          "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+          "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+          "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+          "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+          "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+          "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+          "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+          "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+          "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+          "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+          "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+          "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+          "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+          "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+          "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47"
+        },
+        "source_unchanged_during_run": true,
+        "started_at_utc": "2026-10-18T22:52:02.919181+00:00",
+        "status": "complete",
+        "threshold_interpretation": "These flags compare this single observed Linux run with numeric targets; they do not establish equivalent reference hardware, cold-cache performance or other-platform support.",
+        "tool_version": "0.2.0.dev3",
+        "worker_peak_rss_kib": 28416
+      },
+      "sha256": "44fc2c9b291583a2f9aca0a4296e280c9612f1d16874eca4a23c044e37719154"
+    },
+    {
+      "path": "dev/benchmark-linux-dev3-run2.json",
+      "receipt": {
+        "analysis_execution_mode": "in_process_core_measurement_not_child_launch",
+        "analysis_expected_outcome": "Both conditional templates entailed; failure counts evaluated as observations and duplicate groups, not proven real-world attempts.",
+        "analysis_input_digest": "3563f611e8d0f41fa16f98715c6afc0cf888db751330f3e54350b18a09f575bb",
+        "analysis_limits": {
+          "max_claims": 1000,
+          "max_dependency_edges": 250000,
+          "max_events": 100000,
+          "max_findings": 20000,
+          "max_memberships": 1000000,
+          "max_memory_bytes": 1073741824,
+          "max_relations": 250000,
+          "max_report_bytes": 67108864,
+          "max_scenarios": 64,
+          "max_support_refs": 250000,
+          "max_time_variables": 32,
+          "max_wall_seconds": 900,
+          "schema": "probentium.analysis-limits.v1"
+        },
+        "analysis_outcomes": [
+          {
+            "count_units": [
+              "normalized_observation",
+              "explicit_duplicate_group"
+            ],
+            "execution_state": "complete",
+            "findings": 2,
+            "template": "auth_after_failures",
+            "verdicts": [
+              "entailed",
+              "entailed"
+            ]
+          },
+          {
+            "count_units": [],
+            "execution_state": "complete",
+            "findings": 1,
+            "template": "post_auth_process",
+            "verdicts": [
+              "entailed"
+            ]
+          }
+        ],
+        "architecture": "x86_64",
+        "cache_condition": "Fresh temporary case; operating-system caches were not evicted. Reads follow import and verification.",
+        "case_revision": 26,
+        "clock_assumption": {
+          "model_sha256": "96e88e799b3a72f1548b74367ce245e57879131d66455b7d9524b9931b49700c",
+          "scope": "The generated benchmark artifact only; no real host calibration is asserted.",
+          "type": "explicit_synthetic_zero_error"
+        },
+        "corpus_bytes": 15000000,
+        "corpus_sha256": "82a5461cc9fad4a67e5bafbeb6f083642f89b2e9ac0f67907f7483b4cd2d7db2",
+        "cpu_affinity_count": 4,
+        "database_bytes": 576397312,
+        "dependencies": {
+          "cryptography": "50.0.2",
+          "rfc8785": "0.1.4"
+        },
+        "environment_limitations": [
+          "Linux host measurement; not a macOS reference measurement.",
+          "CPU affinity limits eligible CPUs, not exclusive CPU availability.",
+          "Other host workloads were not stopped; this is not an isolated performance laboratory."
+        ],
+        "event_count": 100000,
+        "finished_at_utc": "2026-10-18T23:02:21.607217+00:00",
+        "import_accounting": {
+          "counters": {
+            "blank": 0,
+            "known_out_of_scope": 0,
+            "malformed": 0,
+            "oversize": 0,
+            "parsed": 100000,
+            "unsupported": 0
+          },
+          "events_total": 100000,
+          "interpretation_complete": true,
+          "records_total": 100000,
+          "state": "complete",
+          "unprocessed_bytes": 0
+        },
+        "integrity_passed": true,
+        "integrity_receipt": {
+          "checks": [
+            "database_structure",
+            "catalog_membership",
+            "evidence_and_record_bytes",
+            "parse_accounting_and_active_selection",
+            "normalized_event_identity",
+            "object_and_acquisition_identity",
+            "blob_inventory"
+          ],
+          "completeness": "acquired_bytes_present",
+          "exit_code": 0,
+          "limitations": [
+            "hashes_do_not_authenticate_authorship",
+            "parser_reexecution_not_performed",
+            "external_whole_history_rewrite_not_detectable_without_trusted_snapshot"
+          ],
+          "ok": true
+        },
+        "measurement_scope": {
+          "clock_setup": "Production save_clock validation and immutable write for an explicitly synthetic clock assumption.",
+          "full_verify": "Production CaseStore.verify including full source hashing and stored integrity checks.",
+          "import": "Production CaseStore.ingest including parser worker and checkpoints; source generation excluded.",
+          "load_data": "Production load_data, including its own mandatory verification, pagination and analytic projection.",
+          "rss": "Process lifetime peak including generation, import, verification, setup and analysis. Child value is RUSAGE_CHILDREN maximum, not a sum of simultaneous workers.",
+          "two_templates": "One correlate_many_data call over loaded data; includes validation, semantic digests and both templates. No source-file I/O."
+        },
+        "measurements": {
+          "clock_setup_ms": 85644,
+          "full_verify_ms": 46489,
+          "import_ms": 75339,
+          "load_data_ms": 78209,
+          "page_first_ms": 39,
+          "page_median_ms": 86,
+          "page_p95_ms": 132,
+          "two_templates_ms": 13001
+        },
+        "memory_profile": "Host allocation; no 16 GiB reference-machine memory cap was applied.",
+        "observed_thresholds": {
+          "import_under_60s": false,
+          "page_p95_under_250ms": true,
+          "parent_under_512mib": true,
+          "two_templates_under_15s": true
+        },
+        "page_sampling": {
+          "condition": "Post-verification reads; the first sample is not a cold-cache measurement.",
+          "latencies_ms": [
+            39,
+            43,
+            47,
+            47,
+            51,
+            54,
+            59,
+            61,
+            64,
+            67,
+            72,
+            72,
+            79,
+            81,
+            83,
+            88,
+            92,
+            88,
+            93,
+            119,
+            98,
+            102,
+            105,
+            108,
+            124,
+            153,
+            121,
+            123,
+            124,
+            132
+          ],
+          "offsets": [
+            0,
+            3444,
+            6889,
+            10334,
+            13779,
+            17224,
+            20668,
+            24113,
+            27558,
+            31003,
+            34448,
+            37893,
+            41337,
+            44782,
+            48227,
+            51672,
+            55117,
+            58562,
+            62006,
+            65451,
+            68896,
+            72341,
+            75786,
+            79231,
+            82675,
+            86120,
+            89565,
+            93010,
+            96455,
+            99900
+          ],
+          "p95_method": "nearest rank: sorted samples[ceil(0.95*n)-1]",
+          "page_size": 100,
+          "samples": 30
+        },
+        "parent_peak_rss_kib": 323160,
+        "platform": "Linux",
+        "python": "3.13.5",
+        "run_count": 1,
+        "schema": "probentium.benchmark.v2",
+        "source_sha256_after": {
+          "dev/benchmark.py": "c9f4056be947fffb311d258878d012e3239ceab2838878b3c64db68f073f7455",
+          "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+          "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+          "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+          "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+          "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+          "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+          "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+          "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+          "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+          "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+          "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+          "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+          "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+          "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+          "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+          "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+          "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+          "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+          "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+          "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+          "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47"
+        },
+        "source_sha256_before": {
+          "dev/benchmark.py": "c9f4056be947fffb311d258878d012e3239ceab2838878b3c64db68f073f7455",
+          "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+          "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+          "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+          "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+          "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+          "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+          "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+          "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+          "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+          "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+          "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+          "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+          "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+          "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+          "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+          "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+          "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+          "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+          "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+          "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+          "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47"
+        },
+        "source_unchanged_during_run": true,
+        "started_at_utc": "2026-10-18T22:57:19.232883+00:00",
+        "status": "complete",
+        "threshold_interpretation": "These flags compare this single observed Linux run with numeric targets; they do not establish equivalent reference hardware, cold-cache performance or other-platform support.",
+        "tool_version": "0.2.0.dev3",
+        "worker_peak_rss_kib": 28416
+      },
+      "sha256": "4d135744edf842dbeb36125b2e4de3b80b1fc795c078bf156e0359dea7981f33"
+    },
+    {
+      "path": "dev/benchmark-linux-dev3-run3.json",
+      "receipt": {
+        "analysis_execution_mode": "in_process_core_measurement_not_child_launch",
+        "analysis_expected_outcome": "Both conditional templates entailed; failure counts evaluated as observations and duplicate groups, not proven real-world attempts.",
+        "analysis_input_digest": "3563f611e8d0f41fa16f98715c6afc0cf888db751330f3e54350b18a09f575bb",
+        "analysis_limits": {
+          "max_claims": 1000,
+          "max_dependency_edges": 250000,
+          "max_events": 100000,
+          "max_findings": 20000,
+          "max_memberships": 1000000,
+          "max_memory_bytes": 1073741824,
+          "max_relations": 250000,
+          "max_report_bytes": 67108864,
+          "max_scenarios": 64,
+          "max_support_refs": 250000,
+          "max_time_variables": 32,
+          "max_wall_seconds": 900,
+          "schema": "probentium.analysis-limits.v1"
+        },
+        "analysis_outcomes": [
+          {
+            "count_units": [
+              "normalized_observation",
+              "explicit_duplicate_group"
+            ],
+            "execution_state": "complete",
+            "findings": 2,
+            "template": "auth_after_failures",
+            "verdicts": [
+              "entailed",
+              "entailed"
+            ]
+          },
+          {
+            "count_units": [],
+            "execution_state": "complete",
+            "findings": 1,
+            "template": "post_auth_process",
+            "verdicts": [
+              "entailed"
+            ]
+          }
+        ],
+        "architecture": "x86_64",
+        "cache_condition": "Fresh temporary case; operating-system caches were not evicted. Reads follow import and verification.",
+        "case_revision": 26,
+        "clock_assumption": {
+          "model_sha256": "96e88e799b3a72f1548b74367ce245e57879131d66455b7d9524b9931b49700c",
+          "scope": "The generated benchmark artifact only; no real host calibration is asserted.",
+          "type": "explicit_synthetic_zero_error"
+        },
+        "corpus_bytes": 15000000,
+        "corpus_sha256": "82a5461cc9fad4a67e5bafbeb6f083642f89b2e9ac0f67907f7483b4cd2d7db2",
+        "cpu_affinity_count": 4,
+        "database_bytes": 576397312,
+        "dependencies": {
+          "cryptography": "50.0.2",
+          "rfc8785": "0.1.4"
+        },
+        "environment_limitations": [
+          "Linux host measurement; not a macOS reference measurement.",
+          "CPU affinity limits eligible CPUs, not exclusive CPU availability.",
+          "Other host workloads were not stopped; this is not an isolated performance laboratory."
+        ],
+        "event_count": 100000,
+        "finished_at_utc": "2026-10-18T23:08:10.302662+00:00",
+        "import_accounting": {
+          "counters": {
+            "blank": 0,
+            "known_out_of_scope": 0,
+            "malformed": 0,
+            "oversize": 0,
+            "parsed": 100000,
+            "unsupported": 0
+          },
+          "events_total": 100000,
+          "interpretation_complete": true,
+          "records_total": 100000,
+          "state": "complete",
+          "unprocessed_bytes": 0
+        },
+        "integrity_passed": true,
+        "integrity_receipt": {
+          "checks": [
+            "database_structure",
+            "catalog_membership",
+            "evidence_and_record_bytes",
+            "parse_accounting_and_active_selection",
+            "normalized_event_identity",
+            "object_and_acquisition_identity",
+            "blob_inventory"
+          ],
+          "completeness": "acquired_bytes_present",
+          "exit_code": 0,
+          "limitations": [
+            "hashes_do_not_authenticate_authorship",
+            "parser_reexecution_not_performed",
+            "external_whole_history_rewrite_not_detectable_without_trusted_snapshot"
+          ],
+          "ok": true
+        },
+        "measurement_scope": {
+          "clock_setup": "Production save_clock validation and immutable write for an explicitly synthetic clock assumption.",
+          "full_verify": "Production CaseStore.verify including full source hashing and stored integrity checks.",
+          "import": "Production CaseStore.ingest including parser worker and checkpoints; source generation excluded.",
+          "load_data": "Production load_data, including its own mandatory verification, pagination and analytic projection.",
+          "rss": "Process lifetime peak including generation, import, verification, setup and analysis. Child value is RUSAGE_CHILDREN maximum, not a sum of simultaneous workers.",
+          "two_templates": "One correlate_many_data call over loaded data; includes validation, semantic digests and both templates. No source-file I/O."
+        },
+        "measurements": {
+          "clock_setup_ms": 86215,
+          "full_verify_ms": 48022,
+          "import_ms": 76599,
+          "load_data_ms": 78732,
+          "page_first_ms": 38,
+          "page_median_ms": 90,
+          "page_p95_ms": 152,
+          "two_templates_ms": 13025
+        },
+        "memory_profile": "Host allocation; no 16 GiB reference-machine memory cap was applied.",
+        "observed_thresholds": {
+          "import_under_60s": false,
+          "page_p95_under_250ms": true,
+          "parent_under_512mib": true,
+          "two_templates_under_15s": true
+        },
+        "page_sampling": {
+          "condition": "Post-verification reads; the first sample is not a cold-cache measurement.",
+          "latencies_ms": [
+            38,
+            40,
+            43,
+            46,
+            51,
+            53,
+            59,
+            63,
+            65,
+            66,
+            69,
+            71,
+            81,
+            91,
+            98,
+            88,
+            89,
+            97,
+            97,
+            108,
+            140,
+            119,
+            114,
+            122,
+            127,
+            130,
+            137,
+            130,
+            152,
+            178
+          ],
+          "offsets": [
+            0,
+            3444,
+            6889,
+            10334,
+            13779,
+            17224,
+            20668,
+            24113,
+            27558,
+            31003,
+            34448,
+            37893,
+            41337,
+            44782,
+            48227,
+            51672,
+            55117,
+            58562,
+            62006,
+            65451,
+            68896,
+            72341,
+            75786,
+            79231,
+            82675,
+            86120,
+            89565,
+            93010,
+            96455,
+            99900
+          ],
+          "p95_method": "nearest rank: sorted samples[ceil(0.95*n)-1]",
+          "page_size": 100,
+          "samples": 30
+        },
+        "parent_peak_rss_kib": 323216,
+        "platform": "Linux",
+        "python": "3.13.5",
+        "run_count": 1,
+        "schema": "probentium.benchmark.v2",
+        "source_sha256_after": {
+          "dev/benchmark.py": "c9f4056be947fffb311d258878d012e3239ceab2838878b3c64db68f073f7455",
+          "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+          "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+          "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+          "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+          "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+          "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+          "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+          "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+          "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+          "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+          "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+          "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+          "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+          "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+          "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+          "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+          "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+          "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+          "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+          "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+          "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47"
+        },
+        "source_sha256_before": {
+          "dev/benchmark.py": "c9f4056be947fffb311d258878d012e3239ceab2838878b3c64db68f073f7455",
+          "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+          "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+          "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+          "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+          "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+          "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+          "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+          "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+          "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+          "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+          "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+          "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+          "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+          "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+          "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+          "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+          "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+          "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+          "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+          "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+          "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47"
+        },
+        "source_unchanged_during_run": true,
+        "started_at_utc": "2026-10-18T23:03:03.846265+00:00",
+        "status": "complete",
+        "threshold_interpretation": "These flags compare this single observed Linux run with numeric targets; they do not establish equivalent reference hardware, cold-cache performance or other-platform support.",
+        "tool_version": "0.2.0.dev3",
+        "worker_peak_rss_kib": 28292
+      },
+      "sha256": "0379b158b3da693c839f80e455cc2b15c7099078418e456d0b9b5c9af6fc7e85"
+    }
+  ],
+  "event_schema_check": {
+    "failures": [],
+    "independent_review": false,
+    "invalid_fixtures": 167,
+    "runtime_only_fixtures": 8,
+    "runtime_only_scope": "Separate unit tests cover byte syntax, calendar validity and timestamp interval bounds.",
+    "schema": "probentium.event-schema-check.v1",
+    "valid_fixtures": 57,
+    "validator": "jsonschema 4.25.1"
+  },
+  "final_test_corpus_sha256": {
+    "tests/test_analysis.py": "22d7084134395d6cc30dff28b1a644f815916da46bae4346222aebe83a417ba5",
+    "tests/test_case.py": "454859aba74f266feff9ece35341e50aa698d52399e10e493efab36d1bfaccfd",
+    "tests/test_cli.py": "0a56fa8f7f84c9b437395efc48c874c4ddd059f121a738c88766b7871f92804a",
+    "tests/test_parsers.py": "4c912ccb84a67902a410143ac186a96fffc63307cd647fd2392a4de6f63ab42b",
+    "tests/test_report.py": "1a8a1de57ad43fa5b967cd2c0139ec63095628159fbbdf40ab2030436d113ffc",
+    "tests/test_safeio_review.py": "45578be1b7304ab313cffcf37b478cd1837f5cae8afe851b3fd83ba9042c10b1",
+    "tests/test_timeutil.py": "641ef6df6440efd54c1b158a27c9474f0191e13c965ca5f20b93a2ca5b13c4fe",
+    "tests/test_triage.py": "10110d39602ec228cc92ecc5988686fe5002dff3d06bc4d7d9efafa3efcf191c",
+    "tests/test_tui.py": "e63b69b87c94a2f1cc71d843b3a88dc86b06aa388250c4b6d699656587efeec8",
+    "tests_r1/test_adapters_v2.py": "31bf06d8c17d0a3d1619b2760565a3a7e124252d95dd5cb7cbe21ece547512c7",
+    "tests_r1/test_budgets.py": "90694a61d5474a2ae2cfed06b98711513f28b37fc27093cd8097a0ae6bc305c4",
+    "tests_r1/test_calendar_plan.py": "6bfbb1617ff877a02b59a5bffc5df256042ec5cfd17e0e12e743487e93b905eb",
+    "tests_r1/test_checkpoint_matrix.py": "a7137fd9b6fc376243a655df60eb3a6583f990f8f30cdcd71c5b3591e548705b",
+    "tests_r1/test_claims.py": "d85afc20ffec665c051ee9634776c850e202340234fc45322c623f8d70fd1ef5",
+    "tests_r1/test_cli_contract.py": "afa06e7c8cb79a8d7f6ffdca5c3b2447d9b205720340378836c9a2f1c75113da",
+    "tests_r1/test_cli_workflow.py": "910196c643e977c511699ea142194474f978d6f1099f60c778226699f1bbe3ad",
+    "tests_r1/test_control_observations.py": "4bedf5c3293f99b9e999a0fe20001b54970ba9d03d027b6d15fe9b31e7eeadf6",
+    "tests_r1/test_deadline_evaluations.py": "3765c8401c32b2f3d436e706a6a6a61ade070634e878042f13fe809878bd20ee",
+    "tests_r1/test_dependency_graph.py": "80a87536af91f68ad35107e4ce23087ed079dd2e244a1f43358799b6821e2be2",
+    "tests_r1/test_diagnostics.py": "5f534af6f547dbc750668d891c73d155c5a3225e0613f6472ee4643fdc0219a6",
+    "tests_r1/test_exchange.py": "8754fd43f703e4ae37c73586396d9c88b94b4ec2cc82c83da20461ac61694a30",
+    "tests_r1/test_extended_commands.py": "8b1af3fe8d4aee6cce09557d4ae4100da7403ac2ae4c5019cbd086209d476cd5",
+    "tests_r1/test_governance.py": "df04977a48c66c2da91416cb477e924cb062cceb09ab4b2fa32935849a864770",
+    "tests_r1/test_intake_maintenance.py": "62da3a068c543a0d085bb2d10c9cda359e2c8018c88560fac1a04489c8ab0ba6",
+    "tests_r1/test_integration_boundaries.py": "17f8fcec9c1c705a816a5ed0937397da106a3aa4f66d279baa66f1cce79e873a",
+    "tests_r1/test_investigation.py": "77c3594856278f2de52f469c76396db745b9055204e69822dc7495e7aa8773d9",
+    "tests_r1/test_legacy_migration.py": "977e473d7f7393874d619ac101dda0446f8bc094f8ac906d8359491f861a08a9",
+    "tests_r1/test_legalcoverage.py": "96e54c30beeb68bb58918021ed02d2e72243a793d579821ae5c2aa72b067edb1",
+    "tests_r1/test_legalpacks.py": "5b542ff4034b9a9259d8c5769d5722a95a9e0ca71e4352941630059775211333",
+    "tests_r1/test_limits.py": "0abb0ea9a8d22835273a37e1af9628a2917cab9927f86d631f2da3d510c0576d",
+    "tests_r1/test_locators.py": "f275a1d3d7872125fe483e49a216aa29c914558691c4f462edea58c4c357c486",
+    "tests_r1/test_maintenance_faults.py": "9355f11130aab18b8ec060bb76ee8cd37b25ed50ed3dcc3522a9c888ee11815f",
+    "tests_r1/test_parser_artifact.py": "70f18e64968e10c1edde87d11d23ef5cba4733b03422c54df4c88302d123c15e",
+    "tests_r1/test_preview_security.py": "f5f43f8a28a4dfbc252d3c0cdb629b85fc4f086d54ac536e379e0c2efe81e4f4",
+    "tests_r1/test_regulatory.py": "aa1a72db17504c5f12a74dbbe86de89c1b0003afc707235017269f300a21e3af",
+    "tests_r1/test_release_boundaries.py": "ff6669a0e3c4799d0b68527a0d699d64dcb11598407748fc85a2ee738570c798",
+    "tests_r1/test_reporting.py": "cf10d5e2fae9fb1df98af77ac4b49430ecbe5d4a31acb1674e6e6264518f73fd",
+    "tests_r1/test_retention_inventory.py": "f8cbc33b3e2be07d59176f6da1df0b53d9c2fae8b15fd4784f3ae645aaeb5cff",
+    "tests_r1/test_reviews.py": "bdfef7b6d5c7ef3b5c3ce088eb76630e8fc64f3daf0414daafe5443cfc6ac190",
+    "tests_r1/test_screen.py": "a2d80810ac9cf19143a929ed725e0e47a81cb4336f721d43371fb672f6080fb2",
+    "tests_r1/test_signatures.py": "6610538fcd90207afffe9d2a397df25d204efb516b7c44b84a02a6435bc1a425",
+    "tests_r1/test_store.py": "a35f07aee91cb55fff50e8288192bdc553ecbb5dfce8b24274a098c7949aaa4f",
+    "tests_r1/test_time_model.py": "5946b3cca407e89d61ca823b0854a940721289cd9ae6a66291f857190c2964b6",
+    "tests_r1/test_workbench_review.py": "f51f1ac7eb652fd49bad77c1af99c6c20422258722cc81a0fcda505f79c3181d"
+  },
+  "initial_test_corpus_sha256": {
+    "tests/test_analysis.py": "22d7084134395d6cc30dff28b1a644f815916da46bae4346222aebe83a417ba5",
+    "tests/test_case.py": "454859aba74f266feff9ece35341e50aa698d52399e10e493efab36d1bfaccfd",
+    "tests/test_cli.py": "0a56fa8f7f84c9b437395efc48c874c4ddd059f121a738c88766b7871f92804a",
+    "tests/test_parsers.py": "4c912ccb84a67902a410143ac186a96fffc63307cd647fd2392a4de6f63ab42b",
+    "tests/test_report.py": "1a8a1de57ad43fa5b967cd2c0139ec63095628159fbbdf40ab2030436d113ffc",
+    "tests/test_safeio_review.py": "45578be1b7304ab313cffcf37b478cd1837f5cae8afe851b3fd83ba9042c10b1",
+    "tests/test_timeutil.py": "641ef6df6440efd54c1b158a27c9474f0191e13c965ca5f20b93a2ca5b13c4fe",
+    "tests/test_triage.py": "10110d39602ec228cc92ecc5988686fe5002dff3d06bc4d7d9efafa3efcf191c",
+    "tests/test_tui.py": "e63b69b87c94a2f1cc71d843b3a88dc86b06aa388250c4b6d699656587efeec8",
+    "tests_r1/test_adapters_v2.py": "31bf06d8c17d0a3d1619b2760565a3a7e124252d95dd5cb7cbe21ece547512c7",
+    "tests_r1/test_budgets.py": "90694a61d5474a2ae2cfed06b98711513f28b37fc27093cd8097a0ae6bc305c4",
+    "tests_r1/test_calendar_plan.py": "6bfbb1617ff877a02b59a5bffc5df256042ec5cfd17e0e12e743487e93b905eb",
+    "tests_r1/test_checkpoint_matrix.py": "a7137fd9b6fc376243a655df60eb3a6583f990f8f30cdcd71c5b3591e548705b",
+    "tests_r1/test_claims.py": "d85afc20ffec665c051ee9634776c850e202340234fc45322c623f8d70fd1ef5",
+    "tests_r1/test_cli_contract.py": "afa06e7c8cb79a8d7f6ffdca5c3b2447d9b205720340378836c9a2f1c75113da",
+    "tests_r1/test_cli_workflow.py": "910196c643e977c511699ea142194474f978d6f1099f60c778226699f1bbe3ad",
+    "tests_r1/test_control_observations.py": "4bedf5c3293f99b9e999a0fe20001b54970ba9d03d027b6d15fe9b31e7eeadf6",
+    "tests_r1/test_deadline_evaluations.py": "3765c8401c32b2f3d436e706a6a6a61ade070634e878042f13fe809878bd20ee",
+    "tests_r1/test_dependency_graph.py": "80a87536af91f68ad35107e4ce23087ed079dd2e244a1f43358799b6821e2be2",
+    "tests_r1/test_diagnostics.py": "5f534af6f547dbc750668d891c73d155c5a3225e0613f6472ee4643fdc0219a6",
+    "tests_r1/test_exchange.py": "8754fd43f703e4ae37c73586396d9c88b94b4ec2cc82c83da20461ac61694a30",
+    "tests_r1/test_extended_commands.py": "9569e83c4a7e05d7896e0807275d20ead737d762749ca4baf3f09d2291e5cfa8",
+    "tests_r1/test_governance.py": "df04977a48c66c2da91416cb477e924cb062cceb09ab4b2fa32935849a864770",
+    "tests_r1/test_intake_maintenance.py": "62da3a068c543a0d085bb2d10c9cda359e2c8018c88560fac1a04489c8ab0ba6",
+    "tests_r1/test_integration_boundaries.py": "17f8fcec9c1c705a816a5ed0937397da106a3aa4f66d279baa66f1cce79e873a",
+    "tests_r1/test_investigation.py": "77c3594856278f2de52f469c76396db745b9055204e69822dc7495e7aa8773d9",
+    "tests_r1/test_legacy_migration.py": "977e473d7f7393874d619ac101dda0446f8bc094f8ac906d8359491f861a08a9",
+    "tests_r1/test_legalcoverage.py": "96e54c30beeb68bb58918021ed02d2e72243a793d579821ae5c2aa72b067edb1",
+    "tests_r1/test_legalpacks.py": "5b542ff4034b9a9259d8c5769d5722a95a9e0ca71e4352941630059775211333",
+    "tests_r1/test_limits.py": "0abb0ea9a8d22835273a37e1af9628a2917cab9927f86d631f2da3d510c0576d",
+    "tests_r1/test_locators.py": "f275a1d3d7872125fe483e49a216aa29c914558691c4f462edea58c4c357c486",
+    "tests_r1/test_maintenance_faults.py": "9355f11130aab18b8ec060bb76ee8cd37b25ed50ed3dcc3522a9c888ee11815f",
+    "tests_r1/test_parser_artifact.py": "70f18e64968e10c1edde87d11d23ef5cba4733b03422c54df4c88302d123c15e",
+    "tests_r1/test_preview_security.py": "f5f43f8a28a4dfbc252d3c0cdb629b85fc4f086d54ac536e379e0c2efe81e4f4",
+    "tests_r1/test_regulatory.py": "aa1a72db17504c5f12a74dbbe86de89c1b0003afc707235017269f300a21e3af",
+    "tests_r1/test_release_boundaries.py": "ff6669a0e3c4799d0b68527a0d699d64dcb11598407748fc85a2ee738570c798",
+    "tests_r1/test_reporting.py": "cf10d5e2fae9fb1df98af77ac4b49430ecbe5d4a31acb1674e6e6264518f73fd",
+    "tests_r1/test_retention_inventory.py": "f8cbc33b3e2be07d59176f6da1df0b53d9c2fae8b15fd4784f3ae645aaeb5cff",
+    "tests_r1/test_reviews.py": "bdfef7b6d5c7ef3b5c3ce088eb76630e8fc64f3daf0414daafe5443cfc6ac190",
+    "tests_r1/test_screen.py": "a2d80810ac9cf19143a929ed725e0e47a81cb4336f721d43371fb672f6080fb2",
+    "tests_r1/test_signatures.py": "6610538fcd90207afffe9d2a397df25d204efb516b7c44b84a02a6435bc1a425",
+    "tests_r1/test_store.py": "a35f07aee91cb55fff50e8288192bdc553ecbb5dfce8b24274a098c7949aaa4f",
+    "tests_r1/test_time_model.py": "5946b3cca407e89d61ca823b0854a940721289cd9ae6a66291f857190c2964b6",
+    "tests_r1/test_workbench_review.py": "f51f1ac7eb652fd49bad77c1af99c6c20422258722cc81a0fcda505f79c3181d"
+  },
+  "installed_validation_builds": [
+    {
+      "artifact": {
+        "bytes": 256034,
+        "name": "probentium-0.2.0.dev3-py3-none-any.whl",
+        "sha256": "d19be58feeaa5e36df29024d630efd4f12bba1af11202e3af1efe3dca692668d"
+      },
+      "parity": {
+        "normalized_archive_metadata": true,
+        "parity": "exact",
+        "runtime_and_schema_files": 52,
+        "sha256": "d19be58feeaa5e36df29024d630efd4f12bba1af11202e3af1efe3dca692668d"
+      },
+      "pip_check": "passed",
+      "workflow": {
+        "checks": [
+          {
+            "name": "inherited_network_policy",
+            "status": "passed"
+          },
+          {
+            "inside_environment": true,
+            "modules": [
+              "probentium",
+              "testifex"
+            ],
+            "name": "installed_module_origin",
+            "outside_checkout": true,
+            "status": "passed"
+          },
+          {
+            "name": "doctor",
+            "status": "passed"
+          },
+          {
+            "aligned_verdict": "entailed",
+            "name": "extended_synthetic_demo",
+            "normalized_events": 132,
+            "status": "passed",
+            "unknown_verdict": "unknown",
+            "widened_verdict": "unresolved"
+          },
+          {
+            "name": "case_integrity",
+            "status": "passed"
+          },
+          {
+            "aligned": "current",
+            "name": "claim_explanation_and_currentness",
+            "previous": "stale",
+            "status": "passed"
+          },
+          {
+            "memory_mode": "hard_enforced",
+            "name": "bounded_analysis_child",
+            "revision_bound": true,
+            "status": "passed"
+          },
+          {
+            "deadline": "replayed",
+            "legal_certification": false,
+            "name": "typed_controls_and_frozen_deadline",
+            "observations": 3,
+            "status": "passed"
+          },
+          {
+            "historical_results_rewritten": false,
+            "name": "unified_dependency_graph",
+            "status": "passed"
+          },
+          {
+            "name": "explicit_signing_trust",
+            "status": "passed"
+          },
+          {
+            "name": "revision_bound_signed_review",
+            "status": "passed"
+          },
+          {
+            "name": "signed_packet_and_trust_separation",
+            "revoked_key": "rejected",
+            "status": "passed",
+            "unknown_key": "not_trusted"
+          },
+          {
+            "analysis": "passed",
+            "name": "semantic_packet_replay",
+            "normalization": "passed",
+            "status": "passed"
+          },
+          {
+            "name": "restore_and_replay",
+            "status": "passed"
+          },
+          {
+            "damaged_ciphertext": "rejected",
+            "damaged_output_published": false,
+            "name": "official_age_roundtrip_and_tamper",
+            "plaintext_byte_equal": true,
+            "status": "passed"
+          },
+          {
+            "name": "legacy_demo_parity",
+            "scenarios": 2,
+            "status": "passed"
+          }
+        ],
+        "elapsed_ms": 15960,
+        "limitations": [
+          "One synthetic acceptance run, not the full release or platform matrix.",
+          "Network syscall denial is not a complete hostile-code or filesystem sandbox.",
+          "Hash and signature checks do not establish factual truth or legal compliance."
+        ],
+        "network_isolation": {
+          "after_exec_probe": {
+            "ipv4_socket": "denied",
+            "ipv6_socket": "denied",
+            "socketpair": "denied",
+            "unix_socket": "denied"
+          },
+          "before_exec_probe": {
+            "ipv4_socket": "denied",
+            "ipv6_socket": "denied",
+            "socketpair": "denied",
+            "unix_socket": "denied"
+          },
+          "denied_syscalls": [
+            "socket",
+            "socketpair",
+            "connect",
+            "bind",
+            "listen",
+            "accept",
+            "accept4",
+            "sendto",
+            "sendmsg",
+            "sendmmsg",
+            "recvfrom",
+            "recvmsg",
+            "recvmmsg",
+            "io_uring_setup",
+            "io_uring_enter",
+            "io_uring_register"
+          ],
+          "descendant_policy": "inherited_by_fork_and_exec",
+          "mechanism": "linux_seccomp_errno_eperm",
+          "scope": "validation child and descendants only",
+          "status": "enforced",
+          "system_configuration_changed": false
+        },
+        "packet_sha256": "412640d2e4b1d3e987ad6168bcc3b52fc62d60f4dfde13def072a28cb680079d",
+        "product_workflow_executed": true,
+        "python_version": "3.13.5",
+        "schema": "probentium.installed-acceptance.v1",
+        "status": "passed",
+        "synthetic_only": true,
+        "tool_version": "0.2.0.dev3"
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 786335,
+        "name": "probentium-0.2.0.dev3.tar.gz",
+        "sha256": "9bded52a424fff7aead6836f7cc2f14a0cff33c4ba001bb023ae316b015156f5"
+      },
+      "parity": {
+        "normalized_archive_metadata": true,
+        "parity": "exact",
+        "runtime_and_schema_files": 52,
+        "sha256": "9bded52a424fff7aead6836f7cc2f14a0cff33c4ba001bb023ae316b015156f5"
+      },
+      "pip_check": "passed",
+      "workflow": {
+        "checks": [
+          {
+            "name": "inherited_network_policy",
+            "status": "passed"
+          },
+          {
+            "inside_environment": true,
+            "modules": [
+              "probentium",
+              "testifex"
+            ],
+            "name": "installed_module_origin",
+            "outside_checkout": true,
+            "status": "passed"
+          },
+          {
+            "name": "doctor",
+            "status": "passed"
+          },
+          {
+            "aligned_verdict": "entailed",
+            "name": "extended_synthetic_demo",
+            "normalized_events": 132,
+            "status": "passed",
+            "unknown_verdict": "unknown",
+            "widened_verdict": "unresolved"
+          },
+          {
+            "name": "case_integrity",
+            "status": "passed"
+          },
+          {
+            "aligned": "current",
+            "name": "claim_explanation_and_currentness",
+            "previous": "stale",
+            "status": "passed"
+          },
+          {
+            "memory_mode": "hard_enforced",
+            "name": "bounded_analysis_child",
+            "revision_bound": true,
+            "status": "passed"
+          },
+          {
+            "deadline": "replayed",
+            "legal_certification": false,
+            "name": "typed_controls_and_frozen_deadline",
+            "observations": 3,
+            "status": "passed"
+          },
+          {
+            "historical_results_rewritten": false,
+            "name": "unified_dependency_graph",
+            "status": "passed"
+          },
+          {
+            "name": "explicit_signing_trust",
+            "status": "passed"
+          },
+          {
+            "name": "revision_bound_signed_review",
+            "status": "passed"
+          },
+          {
+            "name": "signed_packet_and_trust_separation",
+            "revoked_key": "rejected",
+            "status": "passed",
+            "unknown_key": "not_trusted"
+          },
+          {
+            "analysis": "passed",
+            "name": "semantic_packet_replay",
+            "normalization": "passed",
+            "status": "passed"
+          },
+          {
+            "name": "restore_and_replay",
+            "status": "passed"
+          },
+          {
+            "damaged_ciphertext": "rejected",
+            "damaged_output_published": false,
+            "name": "official_age_roundtrip_and_tamper",
+            "plaintext_byte_equal": true,
+            "status": "passed"
+          },
+          {
+            "name": "legacy_demo_parity",
+            "scenarios": 2,
+            "status": "passed"
+          }
+        ],
+        "elapsed_ms": 17541,
+        "limitations": [
+          "One synthetic acceptance run, not the full release or platform matrix.",
+          "Network syscall denial is not a complete hostile-code or filesystem sandbox.",
+          "Hash and signature checks do not establish factual truth or legal compliance."
+        ],
+        "network_isolation": {
+          "after_exec_probe": {
+            "ipv4_socket": "denied",
+            "ipv6_socket": "denied",
+            "socketpair": "denied",
+            "unix_socket": "denied"
+          },
+          "before_exec_probe": {
+            "ipv4_socket": "denied",
+            "ipv6_socket": "denied",
+            "socketpair": "denied",
+            "unix_socket": "denied"
+          },
+          "denied_syscalls": [
+            "socket",
+            "socketpair",
+            "connect",
+            "bind",
+            "listen",
+            "accept",
+            "accept4",
+            "sendto",
+            "sendmsg",
+            "sendmmsg",
+            "recvfrom",
+            "recvmsg",
+            "recvmmsg",
+            "io_uring_setup",
+            "io_uring_enter",
+            "io_uring_register"
+          ],
+          "descendant_policy": "inherited_by_fork_and_exec",
+          "mechanism": "linux_seccomp_errno_eperm",
+          "scope": "validation child and descendants only",
+          "status": "enforced",
+          "system_configuration_changed": false
+        },
+        "packet_sha256": "fdf51a3b248ed97d6598a57a63495eb92a9a1a4c8041b2cc18cb036077f31816",
+        "product_workflow_executed": true,
+        "python_version": "3.13.5",
+        "schema": "probentium.installed-acceptance.v1",
+        "status": "passed",
+        "synthetic_only": true,
+        "tool_version": "0.2.0.dev3"
+      }
+    }
+  ],
+  "limitations": [
+    "Local implementer-run validation is not independent security, semantic, legal or usability review.",
+    "The initial full runs retain their one invalid-fixture failure; the corrected four-test module passed in each environment without changing runtime code.",
+    "Interim artifact hashes predate final documentation and one test-fixture correction. Exact final archive parity, hashes and audit are separate sidecars.",
+    "The three host measurements do not cover the full reference-hardware, cache, workload or supported-platform matrix.",
+    "Historical dev2 benchmark and search receipts remain bound only to their own earlier source hashes."
+  ],
+  "parser_distribution_checkpoint": {
+    "approval": "explicit_operator_attestation",
+    "event_count": 1,
+    "explicit_replay": {
+      "analysis_replay": "unavailable",
+      "issues": [
+        "no_stored_evaluations"
+      ],
+      "normalization_replay": "passed"
+    },
+    "files_verified": 225,
+    "forged_installed_cache_ignored": true,
+    "native_tamper": "rejected_and_exact_bytes_restored",
+    "product_sha256": "d19be58feeaa5e36df29024d630efd4f12bba1af11202e3af1efe3dca692668d",
+    "schema": "private.parser-distribution-checkpoint.v1",
+    "scope": "interim_dev3_artifact",
+    "shipped_schemas": [
+      "control-observation.v1.schema.json",
+      "deadline-plan.v1.schema.json",
+      "events-v2.schema.json"
+    ],
+    "status": "passed",
+    "without_approval": {
+      "analysis_replay": "unavailable",
+      "issues": [
+        "parser_version_unavailable"
+      ],
+      "normalization_replay": "unsupported"
+    }
+  },
+  "platform": "Linux",
+  "presentation_validation": {
+    "case_revision": 37,
+    "checks": [
+      "horizontal_top_navigation_retained",
+      "actual_controls_button_and_typed_observations",
+      "integrity_not_checked_to_passed",
+      "actual_claims_button",
+      "keyboard_enter_opens_stored_claim_detail",
+      "return_to_overview"
+    ],
+    "counts": {
+      "controls": 6,
+      "events": 132,
+      "filings": 2,
+      "sources": 2
+    },
+    "files_sha256": {
+      "dev/livepreview/app.js": "a505290b28c8bc80cbe065931be521143a1b86377374aaf0bb3d079f4664e983",
+      "dev/livepreview/index.html": "30d1f1315f38445680aa5d004b1f959faa69370b70b1f0f686902e25aa119243",
+      "dev/livepreview/server.py": "7ce148f573573dd250115cbed6b9ad89346c93bf28f7a50903acea3476bae08a",
+      "dev/livepreview/style.css": "5cd5c1dfd4947d10c8cbd2299fa951dadcac24b316f72a3b56d19b2cad963826"
+    },
+    "limitations": [
+      "Local visual and interaction check, not independent usability or accessibility review."
+    ],
+    "schema": "probentium.local-preview-check.v1",
+    "status": "passed",
+    "synthetic_only": true
+  },
+  "runtime_and_schema_sha256": {
+    "probentium/__init__.py": "961bc79b92c5abe9ffe5fc7988069d6b78a0122171b2deb13110a1624e4fb78f",
+    "probentium/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "probentium/adapters.py": "5b56075e354fa53616237191477bfd9008a00ebf4a4f2f962679731b63a09ef9",
+    "probentium/budgets.py": "68e1f43529cff9956201ed9601837309d0251a7595448ad62288049e2a74252e",
+    "probentium/calendar_plan.py": "85f97cd83499e820e611e13f0063bdaaa83d9243626b7874a487744fc0f5aea7",
+    "probentium/claims.py": "20a3d6df6827c4ec6ccf7490a5eb0f189aaa3751d50dec19670aef66a3b90c86",
+    "probentium/cli.py": "f9e1de14e66878cdc029de37730c2f8600bec21eae4730dc392935676f33eee0",
+    "probentium/cli_contract.py": "80a1af48408678f34ed83293a8983b8f1158d137db448935b6159ca72ca50868",
+    "probentium/commands.py": "985b2a58aa09f5b9cd8a518a12e325b7d622a6619a3a6870a17eeb240292a0f7",
+    "probentium/contracts.py": "6dc12d7fc98c5bde5f4ac8265e0d8bfa08fdc522fd3939b3b9780f44b2d2e99c",
+    "probentium/control_observation.py": "af0d4a32d3a19ac70a377d748a2925a28553c115398f05a12a668f0035951dd5",
+    "probentium/deadline_records.py": "da61523a12d71166845db5be1705ede1fd52b9af6086b508527455567cee5cff",
+    "probentium/deadlines.py": "7aed80f5e5adb4c8a5747cccfe5d9647c1e551a0877373aadf4bcb730c79bd0c",
+    "probentium/demo.py": "d57125c9659e75cdfd82a110016b0eaf678da48a79067fa0c7db75c9fa2964b5",
+    "probentium/dependency_graph.py": "409e7e4a295b4b4cae19bdfe82c8af28d228c9638a1848eadb2e6d5a9a61c234",
+    "probentium/exchange.py": "50044dd6ca5c75c5211e21497a91a2f1e10cc971b552be4823c6abd720fda0af",
+    "probentium/governance.py": "114c6298a5607e9c4138de3b0bbb4d4bb36d200b24551de5d874c2b722aa2e6d",
+    "probentium/intake.py": "34d58d96269e9f10c9439314f6b42ef4223a0fb26885f2d5a193e74bf8237b2e",
+    "probentium/investigation.py": "525692c90cf21e8fed7d6ae41828a6e1152474cc7c82f4d7fd7defd18cd4dac8",
+    "probentium/legalcoverage.py": "b4515373b5a0633a7b39aa5614338516c4b4489903f5179ce10f8423bd63a692",
+    "probentium/legalpacks.py": "96e1233016b9f209fde4df20d130ac15f62477440d5c370178d12b1c80e7515e",
+    "probentium/limits.py": "c59d0cf55f0fba58022f50e521b4913065efe130240ff48a8d179cfa64d4286a",
+    "probentium/locators.py": "2b535f7f7adfa4b21b678e1d4d602c52915060448c137b6b133780a2952b9dcc",
+    "probentium/maintenance.py": "3830cc89adff4ff86d4bf16f0a322e60f6bcca6e87ae7ab38693b2701f375b39",
+    "probentium/parser_artifact.py": "57b57b9da939dc99ea385c9be7b21e1547aed2227ec9429033eeefba79159b76",
+    "probentium/regulatory.py": "86fbb45df105f71675c7bb1f6859ebe51d1b6dd04e7b02e96afdffc8553b94c6",
+    "probentium/reporting.py": "96bd8c493cf75143290a28ee386a5d29cc31926bc9859f824f94245f34a40f98",
+    "probentium/retention.py": "55c9cefa073f16e6c8b04d61c1b93d29f5427460c888b71f459f821dbfc2a63a",
+    "probentium/reviews.py": "acba91c60cce39a157d32ca5ed89a38e614b318f2376f004db5bfaacb2674c81",
+    "probentium/screen.py": "c4939604de15f8b07cee3c4226fc2dd4743f299bf4a0a1138d4545703d31b1e6",
+    "probentium/signatures.py": "822ade718640f1961556fc23cd6546bbfaa524741842054a43efb3cbd4d3aa7b",
+    "probentium/store.py": "6da8d0890372967d120c6ced7ff185d97a9e4181d83f9576fa6c9d327fb38e48",
+    "probentium/time_model.py": "0f03436586ba42b598f2ff8d325e7274a7dd229d8ae784b2843599ce0dbe1639",
+    "probentium/tui.py": "242d0696f798b00b9cf65f54ca638d420217136ea588f6210dd0f2d9af4e3711",
+    "probentium/workbench.py": "f0f546f5b35b9903356b0ae27875400901e0d8528e3fd7697a9845a101097e84",
+    "probentium/worker.py": "0c9d073a57e7862d929ca62b522ed7cf633a82af97875959a755cd3d3481f467",
+    "schemas/control-observation.v1.schema.json": "c2a037a82861de8135ccc88a272fe66c737a50149f5b722d62cedb395c6858ca",
+    "schemas/deadline-plan.v1.schema.json": "e0c453a3fb2785554dc577719df3ba3cb3afef6ab31da2da606762b604603e47",
+    "schemas/events-v2.schema.json": "2945ac0afa475a76a7845b9da59287409c3d553972537bbe046ab9127c115c49",
+    "testifex/__init__.py": "7e19045e74a231cb47c527d5709dc743e5c7aaee67736953598eef9a9fcd3473",
+    "testifex/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "testifex/analysis.py": "abd2a7fccdcd3f65f31d70bd17738ce2faed42a0b4a1a4429a95d523e1fe62d0",
+    "testifex/case.py": "8b00206f81f9504cc8839b20b5c7a79a3ad0c5203d37c21a473e630d33293fc8",
+    "testifex/cli.py": "4e3d45d45d6433899450e1692f0e038d9db36ae8c41efd89948ac1f8f3a8c05a",
+    "testifex/demo.py": "a4eaaddc29037cffc5440f1a772a9bc26961fe227051f699800cd930b76c0675",
+    "testifex/model.py": "3e12a5f1558462163f901e09dab62f925cdc33b3ffcb457c2a8fc785986f5cfe",
+    "testifex/parsers.py": "e51b27e60aa1e94f5e1bcb34dc13a128fd20c0b7ee570c5ee92339845d32ab61",
+    "testifex/report.py": "337de3a678c90accf5a30e2d35a65237f0bf91cc7e956722e5bc47d86989ce74",
+    "testifex/safeio.py": "7a2e38ab22d635e19fc7d67c8c211a62478620e73cf302851f7b6c56055efdd5",
+    "testifex/timeutil.py": "b22a766efa27618c821cd7d6b137130e8638b131f8586a1e054667092e48bf47",
+    "testifex/triage.py": "0423c3997840e03c69c9a4da7921476da517a0dfb03121d9682f4d1c0cc489d5",
+    "testifex/tui.py": "98618d77e149bb8c645799f1308db9f482f9da1f96f57481bcd3b5a45be9d81e"
+  },
+  "schema": "probentium.preview-validation.v2",
+  "synthetic_only": true,
+  "test_count_scope": "671 distinct tests across two environments; reruns are not additional independent cases.",
+  "test_fixture_correction": {
+    "corrected_source_test_sha256": "8b1af3fe8d4aee6cce09557d4ae4100da7403ac2ae4c5019cbd086209d476cd5",
+    "correction": "Synthetic fixture now includes required timestamp and actor fields; no runtime change.",
+    "interim_artifact_and_initial_installed_test_sha256": "9569e83c4a7e05d7896e0807275d20ead737d762749ca4baf3f09d2291e5cfa8",
+    "runtime_changed": false,
+    "test": "tests_r1/test_extended_commands.py"
+  },
+  "test_runs": [
+    {
+      "corrected_module": {
+        "elapsed_ms": 23017,
+        "failures": 0,
+        "log_sha256": "f8b3cb9f3e32bedef1b6f6de8672ed0254c36cd27d803d9ae468b6f3cb74b488",
+        "skipped": 0,
+        "status": "passed",
+        "test_count": 4
+      },
+      "environment": "clean_source_environment",
+      "initial_r1": {
+        "elapsed_ms": 288926,
+        "failures": 1,
+        "log_sha256": "182db2272be595d0494ce7b4f26294a4dce3e5bd0141f8392f464fc53ce33dad",
+        "skipped": 0,
+        "status": "failed",
+        "test_count": 524
+      },
+      "legacy": {
+        "elapsed_ms": 11760,
+        "failures": 0,
+        "log_sha256": "3bb7623c3b60962a26263422bdfae0674d9c4fd75e1acf5a8cec2bf01b8886d6",
+        "skipped": 0,
+        "status": "passed",
+        "test_count": 147
+      },
+      "platform": "Linux",
+      "python": "3.12.3",
+      "result": "passed_after_documented_test_fixture_correction"
+    },
+    {
+      "corrected_module": {
+        "elapsed_ms": 18410,
+        "failures": 0,
+        "log_sha256": "c8882ca00f79663c796519668bbe79f1224f0bf31544eb83583ff352065a2f12",
+        "skipped": 0,
+        "status": "passed",
+        "test_count": 4
+      },
+      "environment": "installed_wheel_outside_checkout",
+      "initial_r1": {
+        "elapsed_ms": 284447,
+        "failures": 1,
+        "log_sha256": "969377815ecf9fd7018371a99696b4c057e19a1fb024d23be9c5b8641a678a8f",
+        "skipped": 0,
+        "status": "failed",
+        "test_count": 524
+      },
+      "legacy": {
+        "elapsed_ms": 15798,
+        "failures": 0,
+        "log_sha256": "1f62ab8b5c8619ffae473073247a6ee95463069dbda1f30484f317781d10274c",
+        "skipped": 0,
+        "status": "passed",
+        "test_count": 147
+      },
+      "platform": "Linux",
+      "python": "3.13.5",
+      "result": "passed_after_documented_test_fixture_correction"
+    }
+  ],
+  "tool_version": "0.2.0.dev3"
+}

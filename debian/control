@@ -1,0 +1,35 @@
+Source: probentium
+Section: utils
+Priority: optional
+Maintainer: Artifex Ignotvs <280174651+artifexignotvs@users.noreply.github.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-python,
+ pybuild-plugin-pyproject,
+ python3-all (>= 3.11),
+ python3-setuptools (>= 77),
+ python3-wheel,
+ python3-rfc8785,
+ python3-cryptography (>= 49.0.0-2),
+ age <!nocheck>,
+ libseccomp2 <!nocheck>,
+Standards-Version: 4.7.4
+Rules-Requires-Root: no
+Homepage: https://github.com/artifexignotvs/testifex
+
+Package: probentium
+Architecture: all
+Depends:
+ ${misc:Depends},
+ python3 (>= 3.11),
+ ${python3:Depends},
+ python3-cryptography (>= 49.0.0-2),
+Recommends: age
+Description: offline evidence analysis and incident reporting drafts
+ Investigate supported evidence formats with exact byte provenance,
+ explicit time uncertainty, conditional claims and reproducible analysis.
+ A terminal workbench exposes evidence, controls, draft reporting timelines,
+ signed evidence packets and revision-bound reviews without a server.
+ .
+ This development preview does not establish factual truth, completeness,
+ legal compliance or independent legal review. Local case data is plaintext.

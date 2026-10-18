@@ -1,0 +1,7 @@
+Tests: installed-workflow
+Depends: @, age, python3, libseccomp2
+Restrictions: allow-stderr
+
+Tests: runtime-suite
+Depends: @, age, python3, libseccomp2
+Restrictions: allow-stderr

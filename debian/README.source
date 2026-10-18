@@ -1,0 +1,24 @@
+PROBENTIUM local Debian packaging draft
+=======================================
+
+This source package uses format 3.0 (quilt). An upstream source archive may
+contain debian/: dpkg-source replaces that directory with the packaging archive
+before applying debian/patches/series. Use an exact immutable source archive,
+not a moving branch checkout, for a distributable source package.
+
+The distribution variant changes dependency metadata only. It does not alter
+application runtime source, evidence formats or the original wheel-approval
+manifest contract. The upstream pyproject file outside the applied quilt patch
+keeps its original exact dependencies. See docs/kali-packaging.md for actual
+system package versions, tests and limitations.
+
+Build tests create a temporary virtual environment with system-site packages
+and no pip. The venv module is supplied by the Python standard-library package
+required through python3-all. Only the newly built module directory is registered
+in that temporary interpreter so isolated parser children can import it.
+Nothing is installed into the host system or fetched by the build rules.
+
+The public GitHub noreply identity in this UNRELEASED draft is not a working
+maintainer mailbox. Replace it with a user-supplied monitored public address
+before requesting distribution inclusion. No team affiliation, upload,
+acceptance, independent security review or legal certification is claimed.

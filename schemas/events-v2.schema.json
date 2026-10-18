@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:probentium:schema:events-v2",
+  "title": "Explicit events v2 record",
+  "description": "Structural contract for adapter 2.1. Runtime validation additionally enforces canonical JSON, record bytes, IP syntax, calendar validity and representable timestamp intervals.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "kind", "recorded_time", "origin", "payload"],
+  "properties": {
+    "schema": {"const": "testifex.events.v2"},
+    "kind": {"enum": ["auth.failure", "auth.success", "process.start", "process.command", "file.create", "file.modify", "file.delete", "network.connection", "account.change"]},
+    "recorded_time": {"$ref": "#/$defs/recordedTime"},
+    "origin": {"$ref": "#/$defs/origin"},
+    "host": {"$ref": "#/$defs/text"},
+    "actor": {"$ref": "#/$defs/text"},
+    "source_ip": {"$ref": "#/$defs/ip"},
+    "source_record_key": {"$ref": "#/$defs/text"},
+    "timestamp_semantics": {"enum": ["event_time", "log_write_time", "export_time", "unknown"]},
+    "payload": {"type": "object"}
+  },
+  "oneOf": [
+    {"properties": {"kind": {"const": "auth.failure"}, "payload": {"$ref": "#/$defs/authFailure"}}},
+    {"properties": {"kind": {"const": "auth.success"}, "payload": {"$ref": "#/$defs/authSuccess"}}},
+    {"properties": {"kind": {"const": "process.start"}, "payload": {"$ref": "#/$defs/processStart"}}},
+    {"properties": {"kind": {"const": "process.command"}, "payload": {"$ref": "#/$defs/processCommand"}}},
+    {"properties": {"kind": {"const": "file.create"}, "payload": {"$ref": "#/$defs/file"}}},
+    {"properties": {"kind": {"const": "file.modify"}, "payload": {"$ref": "#/$defs/file"}}},
+    {"properties": {"kind": {"const": "file.delete"}, "payload": {"$ref": "#/$defs/file"}}},
+    {"properties": {"kind": {"const": "network.connection"}, "payload": {"$ref": "#/$defs/networkConnection"}}},
+    {"properties": {"kind": {"const": "account.change"}, "payload": {"$ref": "#/$defs/accountChange"}}}
+  ],
+  "$defs": {
+    "text": {"type": ["string", "null"], "minLength": 1, "maxLength": 4096},
+    "pid": {"type": ["integer", "null"], "minimum": 0, "maximum": 2147483647},
+    "port": {"type": ["integer", "null"], "minimum": 0, "maximum": 65535},
+    "ip": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "string", "not": {"pattern": "%"}, "anyOf": [{"format": "ipv4"}, {"format": "ipv6"}]}
+      ]
+    },
+    "origin": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["export_tool", "export_version", "upstream_locator"],
+          "properties": {
+            "export_tool": {"$ref": "#/$defs/text"},
+            "export_version": {"$ref": "#/$defs/text"},
+            "upstream_locator": {"$ref": "#/$defs/text"}
+          }
+        }
+      ]
+    },
+    "recordedTime": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["value", "encoding", "resolution_us"],
+          "properties": {
+            "value": {"type": "string"},
+            "encoding": {"enum": ["rfc3339", "unix_us"]},
+            "resolution_us": {"type": "string", "pattern": "^[1-9][0-9]{0,14}$(?![\\s\\S])"}
+          },
+          "allOf": [
+            {
+              "if": {"properties": {"encoding": {"const": "unix_us"}}},
+              "then": {"properties": {"value": {"pattern": "^-?(0|[1-9][0-9]{0,17})$(?![\\s\\S])"}}}
+            },
+            {
+              "if": {"properties": {"encoding": {"const": "rfc3339"}}},
+              "then": {"properties": {"value": {
+                "minLength": 1, "maxLength": 96,
+                "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?([Zz]|[+-]([01][0-9]|2[0-3]):[0-5][0-9])$(?![\\s\\S])",
+                "not": {"pattern": "-00:00$"}
+              }}}
+            }
+          ]
+        }
+      ]
+    },
+    "authFailure": {
+      "type": "object", "additionalProperties": false, "required": ["service"],
+      "properties": {
+        "service": {"$ref": "#/$defs/text"}, "method": {"$ref": "#/$defs/text"}, "reason": {"$ref": "#/$defs/text"}
+      }
+    },
+    "authSuccess": {
+      "type": "object", "additionalProperties": false, "required": ["service"],
+      "properties": {"service": {"$ref": "#/$defs/text"}, "method": {"$ref": "#/$defs/text"}}
+    },
+    "processStart": {
+      "type": "object", "additionalProperties": false, "required": ["pid", "executable"],
+      "properties": {
+        "pid": {"$ref": "#/$defs/pid"}, "parent_pid": {"$ref": "#/$defs/pid"},
+        "executable": {"$ref": "#/$defs/text"}, "command": {"$ref": "#/$defs/text"}
+      }
+    },
+    "processCommand": {
+      "type": "object", "additionalProperties": false, "required": ["command"],
+      "properties": {
+        "pid": {"$ref": "#/$defs/pid"}, "parent_pid": {"$ref": "#/$defs/pid"},
+        "executable": {"$ref": "#/$defs/text"}, "command": {"$ref": "#/$defs/text"}
+      }
+    },
+    "file": {
+      "type": "object", "additionalProperties": false, "required": ["path"],
+      "properties": {
+        "path": {"$ref": "#/$defs/text"},
+        "digest_algorithm": {"enum": [null, "md5", "sha1", "sha256", "sha512"]},
+        "digest": {"$ref": "#/$defs/text"}
+      },
+      "anyOf": [
+        {"properties": {"digest_algorithm": {"type": "null"}, "digest": {"type": "null"}}},
+        {"required": ["digest_algorithm", "digest"], "properties": {"digest_algorithm": {"const": "md5"}, "digest": {"type": "string", "pattern": "^[a-f0-9]{32}$(?![\\s\\S])"}}},
+        {"required": ["digest_algorithm", "digest"], "properties": {"digest_algorithm": {"const": "sha1"}, "digest": {"type": "string", "pattern": "^[a-f0-9]{40}$(?![\\s\\S])"}}},
+        {"required": ["digest_algorithm", "digest"], "properties": {"digest_algorithm": {"const": "sha256"}, "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$(?![\\s\\S])"}}},
+        {"required": ["digest_algorithm", "digest"], "properties": {"digest_algorithm": {"const": "sha512"}, "digest": {"type": "string", "pattern": "^[a-f0-9]{128}$(?![\\s\\S])"}}}
+      ]
+    },
+    "networkConnection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["protocol", "local_ip", "remote_ip", "local_port", "remote_port"],
+      "properties": {
+        "protocol": {"$ref": "#/$defs/text"},
+        "local_ip": {"$ref": "#/$defs/ip"}, "remote_ip": {"$ref": "#/$defs/ip"},
+        "local_port": {"$ref": "#/$defs/port"}, "remote_port": {"$ref": "#/$defs/port"},
+        "direction": {"enum": [null, "inbound", "outbound", "unknown"]}
+      }
+    },
+    "accountChange": {
+      "type": "object", "additionalProperties": false, "required": ["action", "target_account"],
+      "properties": {"action": {"$ref": "#/$defs/text"}, "target_account": {"$ref": "#/$defs/text"}}
+    }
+  }
+}

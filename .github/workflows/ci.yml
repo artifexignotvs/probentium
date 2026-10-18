@@ -15,23 +15,27 @@ concurrency:
 
 jobs:
   installed-packages:
-    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    name: ${{ matrix.os }} / Python ${{ matrix.python }} / ${{ matrix.scope }}
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
             python: "3.11"
+            scope: legacy-and-r1
           - os: ubuntu-latest
             python: "3.13"
+            scope: legacy-and-r1
           - os: macos-latest
             python: "3.13"
+            scope: legacy-only
     env:
       PIP_DISABLE_PIP_VERSION_CHECK: "1"
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
+      VALIDATION_SCOPE: ${{ matrix.scope }}
     steps:
       - name: Check out source
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -43,16 +47,42 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Install build tools
-        run: python -m pip install "build==1.3.0" "setuptools==84.0.0" "wheel==0.45.1"
+      - name: Download pinned preparation wheels (network preparation)
+        shell: bash
+        run: |
+          python scripts/prepare_offline.py --print-pins all > "$RUNNER_TEMP/preparation-pins.txt"
+          python -m pip download --only-binary=:all: --no-deps --requirement "$RUNNER_TEMP/preparation-pins.txt" --dest "$RUNNER_TEMP/downloaded-wheels"
+          python scripts/prepare_offline.py --wheels "$RUNNER_TEMP/downloaded-wheels" --output "$RUNNER_TEMP/offline"
+
+      - name: Install hash-locked build tools from local wheels
+        run: python -m pip install --no-index --find-links "$RUNNER_TEMP/offline/wheelhouse" --require-hashes --requirement "$RUNNER_TEMP/offline/requirements-build.txt"
+
+      - name: Prepare official pinned age executables (network preparation)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          GOTOOLCHAIN: go1.26.9
+          GOSUMDB: sum.golang.org
+          GOPROXY: https://proxy.golang.org
+        run: |
+          mkdir "$RUNNER_TEMP/age-bin"
+          GOBIN="$RUNNER_TEMP/age-bin" go install filippo.io/age/cmd/age@v1.3.2 filippo.io/age/cmd/age-keygen@v1.3.2
+          test "$("$RUNNER_TEMP/age-bin/age" --version)" = "v1.3.2"
+          test "$("$RUNNER_TEMP/age-bin/age-keygen" --version)" = "v1.3.2"
 
       - name: Build normalized distribution candidates
         run: python scripts/build_release.py --output "$RUNNER_TEMP/distributions"
 
-      - name: Test installed wheel and source distribution outside checkout
+      - name: Verify archive permission normalization across umasks
+        run: python -m unittest discover -s scripts -p test_build_release.py -v
+
+      - name: Test installed distributions outside checkout using local dependency wheels
         shell: bash
+        env:
+          PIP_NO_INDEX: "1"
         run: |
           python - <<'PY'
+          import hashlib
           import json
           import os
           from pathlib import Path
@@ -63,6 +93,8 @@ jobs:
           project = Path(os.environ["GITHUB_WORKSPACE"]).resolve()
           temporary = Path(os.environ["RUNNER_TEMP"]).resolve()
           distribution = temporary / "distributions"
+          offline = temporary / "offline"
+          full = os.environ["VALIDATION_SCOPE"] == "legacy-and-r1"
           validation = temporary / "installed-validation"
           validation.mkdir()
 
@@ -70,6 +102,7 @@ jobs:
               return subprocess.run(
                   [str(value) for value in command], cwd=directory, check=True,
                   text=True, stdout=subprocess.PIPE if capture else None,
+                  env=dict(os.environ, PATH=str(Path(command[0]).parent) + os.pathsep + os.environ["PATH"]),
               ).stdout
 
           for package_kind, pattern in (("wheel", "*.whl"), ("sdist", "*.tar.gz")):
@@ -82,22 +115,34 @@ jobs:
               venv.EnvBuilder(with_pip=True).create(environment)
               python = environment / "bin" / "python"
               executable = environment / "bin" / "testifex"
+              current_executable = environment / "bin" / "probentium"
+              run([python, "-m", "pip", "install", "--no-index", "--find-links", offline / "wheelhouse",
+                   "--require-hashes", "--requirement", offline / "requirements-runtime.txt"], work)
               if package_kind == "sdist":
-                  run([python, "-m", "pip", "install", "setuptools==84.0.0", "wheel==0.45.1"], work)
+                  run([python, "-m", "pip", "install", "--no-index", "--find-links", offline / "wheelhouse",
+                       "--require-hashes", "--requirement", offline / "requirements-build.txt"], work)
+              package = candidates[0]
+              if not package.name.startswith("probentium-"):
+                  raise RuntimeError("distribution_name_mismatch")
+              checksum = hashlib.sha256(package.read_bytes()).hexdigest()
+              package_lock = work / "distribution-lock.txt"
+              package_lock.write_text(package.as_uri() + " --hash=sha256:" + checksum + "\n")
               run([python, "-m", "pip", "install", "--no-index", "--no-deps",
-                   "--no-build-isolation", candidates[0]], work)
+                   "--no-build-isolation", "--require-hashes", "--requirement", package_lock], work)
               run([python, "-m", "pip", "check"], work)
               shutil.copytree(project / "tests", work / "tests",
                               ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
 
               # Probatio extra arborem fontium fasciculum institutum legit.
               imported = json.loads(run([python, "-c",
-                  "import json, pathlib, sys, testifex; "
-                  "print(json.dumps({'module': str(pathlib.Path(testifex.__file__).resolve()), "
+                  "import json, pathlib, sys, testifex, probentium; "
+                  "print(json.dumps({'modules': [str(pathlib.Path(testifex.__file__).resolve()), "
+                  "str(pathlib.Path(probentium.__file__).resolve())], "
                   "'prefix': str(pathlib.Path(sys.prefix).resolve())}))"], work, True))
-              module = Path(imported["module"])
-              if not module.is_relative_to(environment) or module.is_relative_to(project):
-                  raise RuntimeError("installed_module_origin_mismatch")
+              for value in imported["modules"]:
+                  module = Path(value)
+                  if not module.is_relative_to(environment) or module.is_relative_to(project):
+                      raise RuntimeError("installed_module_origin_mismatch")
               if Path(imported["prefix"]) != environment:
                   raise RuntimeError("isolated_environment_required")
               run([python, "-m", "unittest", "discover", "-s", "tests", "-v"], work)
@@ -117,5 +162,31 @@ jobs:
               second = json.loads(run([executable, "analyze", "--case", replay], work, True))
               if first != second:
                   raise RuntimeError("replayed_analysis_mismatch")
-              print(package_kind + ": installed tests, synthetic demo and replay passed", flush=True)
+
+              if full:
+                  for binary in ("age", "age-keygen"):
+                      shutil.copy2(temporary / "age-bin" / binary, environment / "bin" / binary)
+                      if run([environment / "bin" / binary, "--version"], work, True).strip() != "v1.3.2":
+                          raise RuntimeError("age_version_mismatch")
+                  shutil.copytree(project / "tests_r1", work / "tests_r1",
+                                  ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+                  # Probationes imaginis loci fontem developmenti separatum poscunt.
+                  shutil.copytree(project / "dev" / "livepreview", work / "dev" / "livepreview",
+                                  ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+                  # Examen AST tantum fontem legit; importatio fasciculum institutum manet.
+                  (work / "probentium").mkdir()
+                  shutil.copy2(project / "probentium" / "workbench.py", work / "probentium" / "workbench.py")
+                  run([python, "-m", "unittest", "discover", "-s", "tests_r1", "-v"], work)
+                  run([current_executable, "--version"], work)
+                  review_demo = json.loads(run([current_executable, "demo", work / "review-demo"], work, True))
+                  case = review_demo["case"]
+                  verified = json.loads(run([current_executable, "verify", "--case", case], work, True))
+                  if not verified.get("ok") or verified.get("completeness") != "acquired_bytes_present":
+                      raise RuntimeError("review_demo_verification_failed")
+                  replayed = json.loads(run([current_executable, "replay", "--case", case], work, True))
+                  if replayed.get("normalization_replay") != "passed" or replayed.get("analysis_replay") != "passed":
+                      raise RuntimeError("review_demo_replay_failed")
+                  run([python, project / "scripts" / "validate_installed.py", "--python", python,
+                       "--output", work / "network-denied"], work)
+              print(package_kind + ": installed " + os.environ["VALIDATION_SCOPE"] + " tests and demos passed", flush=True)
           PY

@@ -1,0 +1,138 @@
+.TH PROBENTIUM 1 "October 2026" "PROBENTIUM 0.2.0.dev3" "User Commands"
+.SH NAME
+probentium \- offline evidence workbench with explicit uncertainty
+.SH SYNOPSIS
+.B probentium
+.br
+.B probentium
+.RB [ \-\-format\ json ]
+.I command
+.RI [ options ]
+.br
+.B probentium console
+.RB [ \-\-case
+.IR directory ]
+.RB [ \-\-ascii ]
+.RB [ \-\-no-banner ]
+.br
+.B probentium browse \-\-case
+.I directory
+.RB [ \-\-ascii ]
+.SH DESCRIPTION
+PROBENTIUM acquires supported evidence, records byte provenance and maintains
+revision-bound interpretations, conditional claims and reporting drafts.
+It operates locally through commands and a keyboard terminal workbench.
+With no arguments on an interactive terminal it opens the console.
+Use console to select a case explicitly or disable the banner.
+This version is a development preview.
+.SH QUICK START
+Create a synthetic exercise in a new directory:
+.PP
+.nf
+probentium demo exercise
+probentium verify \-\-case exercise/case
+probentium browse \-\-case exercise/case \-\-ascii
+.fi
+.PP
+Create a separate case and acquire a supported input:
+.PP
+.nf
+probentium init investigation \-\-name "Local investigation"
+probentium ingest \-\-case investigation evidence.jsonl \\
+  \-\-format events-v2 \-\-label "Supplied evidence"
+probentium timeline \-\-case investigation \-\-limit 25
+.fi
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Show command-specific help, examples, sensitivity and side effects.
+.TP
+.B \-\-version
+Print the application version.
+.TP
+.B \-\-format json
+Use the versioned JSON result envelope. This global option precedes the
+command. The local ingest and inspect format option selects input syntax.
+.TP
+.B \-\-ascii
+For console or browse, render non-ASCII content using visible escapes.
+.TP
+.B \-\-no-banner
+For console, suppress the introductory terminal logo.
+.SH COMMAND GROUPS
+.TP
+.B init, demo, status, sources, ingest, inspect, timeline, event
+Create cases, inspect or acquire supported input and inspect source records.
+.TP
+.B verify, resume, replay, recover, migrate, issues, support
+Check integrity, continue interrupted intake and recover or report bounded state.
+.TP
+.B clock, claim, family, duplicates, identity, scenario, sensitivity, correlate, analysis, graph
+Record interpretations and examine conditional findings, dependencies and limits.
+.TP
+.B control, incident, filing, diff, governance, legal, reporting
+Manage supplied control observations and frozen reporting drafts.
+No command submits a filing to an authority.
+.TP
+.B key, review, packet, parser-artifact, retention
+Manage explicit trust, signed reviews, evidence transport, parser approvals
+and authorized source-byte retention.
+.TP
+.B doctor, formats, schema, batch, browse, console
+Inspect capabilities and contracts, run declared batch work or open the terminal.
+.SH OUTPUT
+Default command output uses JSON. The global JSON option returns an envelope
+containing schema, status, case_revision, verification, data, limitations and
+errors. Unknown revision or verification values remain null.
+JSON uses ASCII escapes. Diagnostics use standard error.
+Evidence output can contain sensitive case content or base64-encoded raw bytes.
+.SH EXIT STATUS
+.TP
+.B 0
+Operation completed; inspect its domain verdict and limitations.
+.TP
+.B 2
+Invalid input, usage or an operation that could not be performed.
+.TP
+.B 3
+Explicit partial availability or incomplete verification scope.
+.TP
+.B 4
+Integrity, signature or binding verification failed.
+.TP
+.B 5
+Revision, lock, hold or conflicting-state refusal.
+.TP
+.B 6
+Resource budget exceeded or work aborted by a limit.
+.TP
+.B 7
+Requested implementation or platform is unsupported.
+.TP
+.B 130
+Interrupted; inspect state before retrying a mutating operation.
+.SH SECURITY AND LIMITATIONS
+The local user, operating system, interpreter and installed dependencies are
+trusted. Hashes prove consistency against a reference, not factual truth,
+authorship or collection completeness. Signatures require independently
+established key trust.
+.PP
+Case databases, indexes and source copies are plaintext. Optional age transport
+encryption does not encrypt the local case. Retention does not promise secure
+erasure. Draft legal profiles do not certify compliance or establish a verified
+legal countdown. Linux is required for current strict resource enforcement.
+.PP
+A Debian installation does not become an approved wheel-distribution manifest.
+Use only the explicitly supported parser provenance path.
+.SH FILES
+.TP
+.I /usr/share/probentium/schemas/
+Installed machine-readable input contracts.
+.TP
+.I /usr/share/doc/probentium/
+Usage, security limitations and packaging status.
+.SH AUTHOR
+Artifex Ignotvs.
+.SH SEE ALSO
+.BR testifex (1),
+.BR age (1)
