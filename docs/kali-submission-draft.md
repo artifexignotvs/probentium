@@ -6,13 +6,14 @@ claimed.
 
 **Name:** PROBENTIUM
 
-**Version:** Local development preview 0.2.0.dev3. A matching public tag/release
-and immutable download are still required; do not submit a branch-head URL as
-a release.
+**Version:** Public technical preview 0.2.0.dev3, frozen at commit
+`4c59347334059b8ff83c46922884c362b6a359c5`. The standalone repository preserves
+the original release files; the later project-link update does not rebuild them.
+Do not submit a branch-head URL as a release.
 
-**Homepage:** https://github.com/artifexignotvs/testifex
+**Homepage:** https://github.com/artifexignotvs/probentium
 
-**Download:** Pending matching public release artifact.
+**Download:** [Immutable preview release](https://github.com/artifexignotvs/probentium/releases/tag/v0.2.0.dev3). Use its Debian bundle to retain the native filenames and verify its inner checksums. The release wheel retains the historical project URLs from the original build; current build metadata points to the standalone repository.
 
 **Author:** Artifex Ignotvs.
 
@@ -45,20 +46,18 @@ collector and requires no browser. This is a scope comparison, not a claim
 that the other tools lack every corresponding feature or that this tool is
 unique or superior. Native imports from those tools are not promised.
 
-**Activity:** Development is active locally. Supply publicly verifiable release
-history and issue-maintenance evidence before submission; do not infer a mature
-maintenance history from local work.
+**Activity:** The technical preview is public. A release does not establish a
+mature maintenance history; supply issue-maintenance evidence before submission.
 
-**How to install:** After downloading the exact validated local package on the
-tested Kali rolling environment:
+**How to install:** After downloading the release Debian bundle, extracting it
+and checking its inner `SHA256SUMS` on the tested Kali rolling environment:
 
 ```sh
 sudo apt install ./probentium_0.2.0~dev3-1_all.deb
 ```
 
-This is a local installation example, not an official repository package. A
-matching public download is still required for a submission. Do not bypass
-dependency checks or pipe downloaded scripts into a shell.
+This is a local installation example, not an official Kali repository package.
+Do not bypass dependency checks or pipe downloaded scripts into a shell.
 
 **How to use:** After a supported installation:
 

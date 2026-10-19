@@ -21,9 +21,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/artifexignotvs/testifex"
-Documentation = "https://github.com/artifexignotvs/testifex/tree/main/docs"
-Issues = "https://github.com/artifexignotvs/testifex/issues"
+Homepage = "https://github.com/artifexignotvs/probentium"
+Documentation = "https://github.com/artifexignotvs/probentium/tree/main/docs"
+Issues = "https://github.com/artifexignotvs/probentium/issues"
 
 [project.scripts]
 testifex = "testifex.cli:main"

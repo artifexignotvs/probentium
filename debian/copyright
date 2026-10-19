@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: PROBENTIUM
-Upstream-Contact: https://github.com/artifexignotvs/testifex/issues
-Source: https://github.com/artifexignotvs/testifex
+Upstream-Contact: https://github.com/artifexignotvs/probentium/issues
+Source: https://github.com/artifexignotvs/probentium
 
 Files: *
 Copyright: 2026 Artifex Ignotvs

@@ -4,6 +4,8 @@
 
 *Ex indiciis, non ex fama.*
 
+PROBENTIUM is a [standalone project](https://github.com/artifexignotvs/probentium). The original [TESTIFEX project](https://github.com/artifexignotvs/testifex) remains separate. This distribution retains the compatibility `testifex` command for existing schema-1 cases.
+
 ## Try a complete synthetic investigation
 
 ```sh
@@ -55,6 +57,8 @@ Python 3.11+ is declared. Recorded validation covers Linux with Python 3.12, 3.1
 The `testifex` command remains available for separate schema-1 cases. `probentium migrate SOURCE DESTINATION` creates a new schema-2 copy; the original is not modified. Protocol namespaces needed for compatibility remain unchanged. [Earlier command documentation](docs/legacy-readme.md).
 
 ## Release status
+
+[Release 0.2.0.dev3](https://github.com/artifexignotvs/probentium/releases/tag/v0.2.0.dev3) preserves the exact files built from commit `4c59347334059b8ff83c46922884c362b6a359c5`, before the repository separation. Its wheel retains the historical project URLs embedded in that build. The subsequent project-link update on `main` changes documentation and package metadata only: all 50 runtime files and three schemas remain unchanged, as do the release tag, archive bytes and recorded validation receipts. New builds use the standalone repository URLs and require their own hashes and validation; the existing release is not rebuilt.
 
 The product name is provisional. The requirement audit distinguishes implemented behavior, partial requirements and external release gates. A successful hash check establishes consistency against a reference, not authorship, truth or collection completeness. Case storage remains plaintext; transport encryption does not encrypt the local database.
 
